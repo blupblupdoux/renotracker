@@ -1,11 +1,8 @@
+import authRoutes from './auth'
+
 const routes = [
-  {
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
-    ]
-  },
+
+  ...authRoutes,
 
   // Always leave this as last one,
   // but you can also remove it
