@@ -1,6 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
 
+const authRoutes = require('./routes/auth')
+
 const app = express()
 
 mongoose.connect(process.env.MONGO_CONNECTION_URI)
@@ -15,5 +17,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 })
+
+app.use('/api/auth', authRoutes)
 
 module.exports = app
