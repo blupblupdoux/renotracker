@@ -24,6 +24,11 @@
       </input-custom>
 
       <q-btn push color="primary" text-color="white" :label="t('auth.registerBtn')" type="submit" class="submit-btn"/>
+
+      <div class="already-register">
+        <span>{{ t('auth.alreadyRegister') }}</span>
+        <router-link class="link" to="/auth/login">{{ t('auth.alreadyRegisterLogin') }}</router-link>
+      </div>
     </q-form>
   </div>
 </template>
@@ -79,5 +84,14 @@ const register = () => {
   margin-top: .5rem;
   width: 100%;
   padding: 0.5rem;
+}
+
+.already-register {
+  margin-top: 1rem;
+  text-align: center;
+
+  .link {
+    margin-left: .5rem
+  }
 }
 </style>
