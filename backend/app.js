@@ -3,9 +3,9 @@ const mongoose = require('mongoose')
 
 const app = express()
 
-// mongoose.connect(process.env.MONGO_PHRASE)
-//   .then(() => console.log('Connexion à MongoDB réussie !'))
-//   .catch(() => console.log('Connexion à MongoDB échouée !'));
+mongoose.connect(process.env.MONGO_CONNECTION_URI)
+  .then(() => console.log('Connexion à MongoDB réussie !'))
+  .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 app.use(express.json())
 
