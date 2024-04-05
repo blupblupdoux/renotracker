@@ -10,5 +10,9 @@ export default {
     registerBtn: 'Soumettre',
     alreadyRegister: 'Vous avez déjà un compte ?',
     alreadyRegisterLogin: 'Connectez-vous !',
+    loginTitle: 'Connexion',
+    loginBtn: 'Se connecter',
+    noAccount: "Vous n'avez pas encore de compte ?",
+    needRegister: 'Inscrivez-vous !',
   }
 }

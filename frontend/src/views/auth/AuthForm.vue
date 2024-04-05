@@ -3,10 +3,11 @@
 
     <img src="../../assets/renotracker-logo-notext.png" width="150" class="renotracker-logo" alt="logo">
 
-    <h2>{{ t('auth.registerTitle') }}</h2>
+    <h2>{{ getTitleLabel }}</h2>
 
-    <q-form @submit="register">
-      <input-custom v-model="form.name" 
+    <q-form @submit="submit">
+
+      <input-custom v-if="mode === 'register'" v-model="form.name" 
         :label="t('auth.nameField')"
         required>
       </input-custom>
@@ -23,32 +24,44 @@
         required>
       </input-custom>
 
-      <q-btn push color="primary" text-color="white" :label="t('auth.registerBtn')" type="submit" class="submit-btn"/>
+      <q-btn push color="primary" text-color="white" :label="getBtnLabel" type="submit" class="submit-btn"/>
 
-      <div class="already-register">
+      <div v-if="mode === 'register'" class="already-register">
         <span>{{ t('auth.alreadyRegister') }}</span>
         <router-link class="link" to="/auth/login">{{ t('auth.alreadyRegisterLogin') }}</router-link>
       </div>
+
+      <div v-if="mode === 'login'" class="need-register">
+        <span>{{ t('auth.noAccount') }}</span>
+        <router-link class="link" to="/auth/register">{{ t('auth.needRegister') }}</router-link>
+      </div>
+
     </q-form>
   </div>
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { api } from "src/boot/axios";
+import { useRoute } from 'vue-router'
 import InputCustom from "../common/InputCustom.vue";
 
 const {t} = useI18n()
+const route = useRoute()
 
-let form = reactive({
+const form = reactive({
   name: "",
   email: "",
   password: "",
 });
 
-const register = () => {
-  api.post('/api/auth/register', form)
+const mode = computed(() => route.path === '/auth/register' ? 'register' : 'login')
+const getTitleLabel = computed(() =>  mode.value === 'register' ? t('auth.registerTitle') : t('auth.loginTitle'))
+const getBtnLabel = computed(() =>  mode.value === 'register' ? t('auth.registerBtn') : t('auth.loginBtn'))
+
+const submit = () => {
+  api.post('/api/auth/' + mode.value, form)
     .then(response => {
       console.log(response.data)
     })
@@ -86,7 +99,7 @@ const register = () => {
   padding: 0.5rem;
 }
 
-.already-register {
+.already-register, .need-register {
   margin-top: 1rem;
   text-align: center;
 
