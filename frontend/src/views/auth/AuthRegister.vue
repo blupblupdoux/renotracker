@@ -13,16 +13,13 @@
 
       <input-custom v-model="form.email" 
         :label="t('auth.emailField')" 
+        type="email"
         required>
       </input-custom>
 
       <input-custom v-model="form.password" 
         :label="t('auth.passwordField')" 
-        required>
-      </input-custom>
-
-      <input-custom v-model="form.password_confirmation" 
-        :label="t('auth.passwordConfirmField')"
+        type="password"
         required>
       </input-custom>
 
@@ -34,6 +31,7 @@
 <script setup>
 import { reactive } from "vue";
 import { useI18n } from "vue-i18n";
+import { api } from "src/boot/axios";
 import InputCustom from "../common/InputCustom.vue";
 
 const {t} = useI18n()
@@ -42,11 +40,13 @@ let form = reactive({
   name: "",
   email: "",
   password: "",
-  password_confirmation: "",
 });
 
 const register = () => {
-  console.log('coucou')
+  api.post('/api/auth/register', form)
+    .then(response => {
+      console.log(response.data)
+    })
 }
 </script>
 
