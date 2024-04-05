@@ -5,7 +5,7 @@
 
     <h2>{{ t('auth.registerTitle') }}</h2>
 
-    <form>
+    <q-form @submit="register">
       <input-custom v-model="form.name" 
         :label="t('auth.nameField')"
         required>
@@ -25,7 +25,9 @@
         :label="t('auth.passwordConfirmField')"
         required>
       </input-custom>
-    </form>
+
+      <q-btn push color="primary" text-color="white" :label="t('auth.registerBtn')" type="submit" class="submit-btn"/>
+    </q-form>
   </div>
 </template>
 
@@ -42,12 +44,18 @@ let form = reactive({
   password: "",
   password_confirmation: "",
 });
+
+const register = () => {
+  console.log('coucou')
+}
 </script>
 
 <style lang="scss" scoped>
 
 #registerPage {
+  margin: auto;
   margin-top: 5rem;
+  width: 35%;
 }
 
 .renotracker-logo {
@@ -57,18 +65,19 @@ let form = reactive({
 }
 
 #registerPage h2 {
-  text-align: center;
   margin-top: 0;
   color: $primary;
   font-weight: 400;
-}
-
-form {
-  margin: auto;
-  width: 35%;
+  font-size: xxx-large
 }
 
 .input-custom-group {
   margin-bottom: 1rem;
+}
+
+.submit-btn {
+  margin-top: .5rem;
+  width: 100%;
+  padding: 0.5rem;
 }
 </style>

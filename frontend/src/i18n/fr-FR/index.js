@@ -8,5 +8,8 @@ export default {
     emailField: 'Email',
     passwordField: 'Mot de passe',
     passwordConfirmField: 'Confirmation du mot de passe',
+    registerBtn: 'Soumettre',
+    alreadyRegister: 'Vous avez déjà un compte ?',
+    alreadyRegisterLogin: 'Connectez-vous !',
   }
 }

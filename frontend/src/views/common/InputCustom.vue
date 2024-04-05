@@ -41,7 +41,7 @@ const getSize = computed(() => (props.size ? "input-" + props.size : ""));
   input,
   input:focus {
     border: 1px solid $light;
-    border-radius: 0.5rem;
+    border-radius: 7px;
     outline: $primary;
     padding: 0.5rem;
   }
