@@ -9,8 +9,23 @@ import axios from 'axios'
 // for each client)
 const api = axios.create({ baseURL: 'http://localhost:3000' })
 
+// Auth config
+axios.defaults.withCredentials = true;
+axios.defaults.withXSRFToken = true;
+
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
+
+  // Retieve token from storage
+  const token = localStorage.getItem(process.env.AUTH_TOKEN_KEY)
+  
+  // Store token in query Headers
+  if (token) {
+    api.interceptors.request.use((config) => {
+      config.headers.Authorization = `Bearer ${token}`;
+      return config;
+    });
+  }
 
   app.config.globalProperties.$axios = axios
   // ^ ^ ^ this will allow you to use this.$axios (for Vue Options API form)

@@ -38,6 +38,10 @@
 
     </q-form>
   </div>
+
+
+  <q-btn push color="primary" text-color="white" label="TEST" @click="test" class="submit-btn"/>
+
 </template>
 
 <script setup>
@@ -63,8 +67,14 @@ const getBtnLabel = computed(() =>  mode.value === 'register' ? t('auth.register
 const submit = () => {
   api.post('/api/auth/' + mode.value, form)
     .then(response => {
-      console.log(response.data)
+      if(response.data.token) {
+        localStorage.setItem(process.env.AUTH_TOKEN_KEY, response.data.token)
+      }
     })
+}
+
+const test = () => {
+  api.get('/api/test')
 }
 </script>
 
