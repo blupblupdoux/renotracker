@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 
 const authRoutes = require('./routes/auth')
 
+const authMiddleware = require('./middlewares/auth')
+
 const app = express()
 
 mongoose.connect(process.env.MONGO_CONNECTION_URI)
@@ -19,7 +21,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/api/auth', authRoutes)
-app.get('/api/test', (req, res, next) => {
+app.get('/api/test', authMiddleware, (req, res, next) => {
   res.json({message: 'TEST'})
 })
 
