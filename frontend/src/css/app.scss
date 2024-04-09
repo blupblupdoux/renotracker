@@ -1,1 +1,9 @@
 // app global css in SCSS form
+
+body {
+  color: $dark
+}
+
+.link, .link:visited {
+  color: $secondary
+}
