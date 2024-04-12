@@ -14,5 +14,16 @@ export default {
     loginBtn: 'Se connecter',
     noAccount: "Vous n'avez pas encore de compte ?",
     needRegister: 'Inscrivez-vous !',
+  },
+  nav: {
+    profile: 'Mon profile',
+    projects: 'Mes projets',
+    tools: 'Outils',
+    dashboard: 'Dashboard projet',
+    subProjects: 'Sous projets',
+    purchases: 'Achats',
+    tags: 'Tags',
+    stats: 'Statistiques',
+    settings: 'Paramètres'
   }
 }

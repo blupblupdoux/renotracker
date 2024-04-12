@@ -36,19 +36,22 @@
 <script setup>
 import NavSidebarHeader from './NavSidebarHeader.vue';
 import NavSidebarItem from './NavSidebarItem.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n()
 
 const mainItems = [
-  {label: "Mes projets", link: "", icon: "r_handyman"},
-  {label: "Outils", link: "", icon: "r_build"},
+  {label: t('nav.projects'), link: "", icon: "r_handyman"},
+  {label: t('nav.tools'), link: "", icon: "r_build"},
 ]
 
 const specificsItems = [
-  {label: "Dashboard projet", link: "", icon: "r_dashboard"},
-  {label: "Sous projet", link: "", icon: "chair"},
-  {label: "Achats", link: "", icon: "shopping_cart"},
-  {label: "Tags", link: "", icon: "tag"},
-  {label: "Statistiques", link: "", icon: "r_signal_cellular_alt"},
-  {label: "Paramètres", link: "", icon: "r_settings"},
+  {label: t('nav.dashboard'), link: "", icon: "r_dashboard"},
+  {label: t('nav.subProjects'), link: "", icon: "chair"},
+  {label: t('nav.purchases'), link: "", icon: "shopping_cart"},
+  {label: t('nav.tags'), link: "", icon: "tag"},
+  {label: t('nav.stats'), link: "", icon: "r_signal_cellular_alt"},
+  {label: t('nav.settings'), link: "", icon: "r_settings"},
 ]
 </script>
 

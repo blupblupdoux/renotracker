@@ -6,12 +6,14 @@
     <div class="q-ml-sm text-weight-bold text-h6">Sarah B</div>
   </div>
 
-  <router-link to="#" class="link">Mon profile</router-link>
+  <router-link to="#" class="link">{{ t('nav.profile') }}</router-link>
 </div>
 
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n()
 </script>
 
 <style lang="scss" scoped>
