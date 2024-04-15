@@ -1,7 +1,12 @@
 // app global css in SCSS form
 
 body {
-  color: $dark
+  color: $dark;
+}
+
+.q-page-container {
+  background-color: $primary;
+  opacity: 4%;
 }
 
 .link, .link:visited {
