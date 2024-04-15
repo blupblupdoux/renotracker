@@ -21,8 +21,5 @@ app.use((req, res, next) => {
 })
 
 app.use('/api/auth', authRoutes)
-app.get('/api/test', authMiddleware, (req, res, next) => {
-  res.json({message: 'TEST'})
-})
 
 module.exports = app

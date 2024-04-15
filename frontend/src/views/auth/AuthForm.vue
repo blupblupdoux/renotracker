@@ -39,9 +39,6 @@
     </q-form>
   </div>
 
-
-  <q-btn push color="primary" text-color="white" label="TEST" @click="test" class="submit-btn"/>
-
 </template>
 
 <script setup>
@@ -73,9 +70,6 @@ const submit = () => {
     })
 }
 
-const test = () => {
-  api.get('/api/test')
-}
 </script>
 
 <style lang="scss">
