@@ -2,6 +2,12 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 
+exports.getCurrentUser = (req, res, next) => {
+  User.findOne({_id: req.auth.userId}, {password: 0})
+    .then(user => res.status(200).json(user))
+    .catch(error => res.status(404).json(error))
+}
+
 exports.register = async (req, res, next) => {
   try {
     const hash = await bcrypt.hash(req.body.password, 10)

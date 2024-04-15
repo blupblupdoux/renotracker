@@ -6,6 +6,10 @@ const routes = [
       { path: 'register', component: () => import('../views/auth/AuthForm.vue') }
     ]
   },
+  {
+    path: '/user/profile',
+    component: () => import('../views/user/UserProfile.vue')
+  }
 ]
 
 export default routes

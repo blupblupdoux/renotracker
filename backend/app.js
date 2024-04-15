@@ -2,8 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 
 const authRoutes = require('./routes/auth')
-
-const authMiddleware = require('./middlewares/auth')
+const userRoutes = require('./routes/user')
 
 const app = express()
 
@@ -21,5 +20,6 @@ app.use((req, res, next) => {
 })
 
 app.use('/api/auth', authRoutes)
+app.use('/api/user', userRoutes)
 
 module.exports = app

@@ -1,8 +1,15 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { api } from 'src/boot/axios';
 
-export const useCounterStore = defineStore('user', () => {
+export const useUserStore = defineStore('user', () => {
   const user = ref(null);
 
-  return {user}
+  const initalizeUser = () => {
+    api.get('/api/user/current').then(response => {
+      console.log(response.data)
+    })
+  }
+
+  return {user, initalizeUser}
 });
