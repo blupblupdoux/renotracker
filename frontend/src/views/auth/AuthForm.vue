@@ -78,43 +78,47 @@ const test = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+
+.q-page-container {
+  background-color: white;
+}
 
 #registerPage {
   margin: auto;
   margin-top: 5rem;
   width: 35%;
-}
 
-.renotracker-logo {
-  position: absolute; 
-  top: .5rem; 
-  left: 1rem;
-}
+  .renotracker-logo {
+    position: absolute; 
+    top: .5rem; 
+    left: 1rem;
+  }
 
-#registerPage h2 {
-  margin-top: 0;
-  color: $primary;
-  font-weight: 400;
-  font-size: xxx-large
-}
+  #registerPage h2 {
+    margin-top: 0;
+    color: $primary;
+    font-weight: 400;
+    font-size: xxx-large
+  }
 
-.input-custom-group {
-  margin-bottom: 1rem;
-}
+  .input-custom-group {
+    margin-bottom: 1rem;
+  }
 
-.submit-btn {
-  margin-top: .5rem;
-  width: 100%;
-  padding: 0.5rem;
-}
+  .submit-btn {
+    margin-top: .5rem;
+    width: 100%;
+    padding: 0.5rem;
+  }
 
-.already-register, .need-register {
-  margin-top: 1rem;
-  text-align: center;
+  .already-register, .need-register {
+    margin-top: 1rem;
+    text-align: center;
 
-  .link {
-    margin-left: .5rem
+    .link {
+      margin-left: .5rem
+    }
   }
 }
 </style>
