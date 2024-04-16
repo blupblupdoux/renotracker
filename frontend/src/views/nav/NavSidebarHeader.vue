@@ -6,7 +6,7 @@
     <div class="q-ml-sm text-weight-bold text-h6">Sarah B</div>
   </div>
 
-  <router-link to="#" class="link">{{ t('nav.profile') }}</router-link>
+  <router-link to="/user/profile" class="link">{{ t('nav.profile') }}</router-link>
 </div>
 
 </template>

@@ -43,7 +43,7 @@ const { t } = useI18n()
 const route = useRoute()
 
 // Display or not the menu
-const drawer = computed(() => !route.path.includes('auth'))
+const drawer = computed(() => !route.path.includes('auth') && route.name !== 'notFound')
 
 const mainItems = [
   {label: t('nav.projects'), link: "", icon: "r_handyman"},
