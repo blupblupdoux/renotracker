@@ -25,5 +25,10 @@ export default {
     tags: 'Tags',
     stats: 'Statistiques',
     settings: 'Paramètres'
+  },
+  profile: {
+    myProfile: 'Mon profile',
+    registeredAt: 'Compte créé le : ',
+    updatedAt: 'Compte modifié le : ',
   }
 }

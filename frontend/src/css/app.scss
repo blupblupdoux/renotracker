@@ -4,8 +4,14 @@ body {
   color: $dark;
 }
 
+h2 {
+  margin-top: 0;
+  font-weight: 400;
+  font-size: xxx-large
+}
+
 .q-page-container {
-  background-color: rgb(27 153 139 / 4%)
+  background-color: #EDF1F1
 }
 
 .link, .link:visited {

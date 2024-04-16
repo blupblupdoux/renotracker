@@ -96,14 +96,7 @@ const submit = () => {
   }
 
   #registerPage h2 {
-    margin-top: 0;
     color: $primary;
-    font-weight: 400;
-    font-size: xxx-large
-  }
-
-  .input-custom-group {
-    margin-bottom: 1rem;
   }
 
   .submit-btn {
