@@ -45,11 +45,13 @@
 import { reactive, computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { api } from "src/boot/axios";
-import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 import InputCustom from "../common/InputCustom.vue";
+import { useUserStore } from "src/stores/user-store";
 
 const {t} = useI18n()
-const route = useRoute()
+const router = useRouter()
+const userStore = useUserStore()
 
 const form = reactive({
   name: "",
@@ -57,7 +59,7 @@ const form = reactive({
   password: "",
 });
 
-const mode = computed(() => route.path === '/auth/register' ? 'register' : 'login')
+const mode = computed(() => router.currentRoute.value.path === '/auth/register' ? 'register' : 'login')
 const getTitleLabel = computed(() =>  mode.value === 'register' ? t('auth.registerTitle') : t('auth.loginTitle'))
 const getBtnLabel = computed(() =>  mode.value === 'register' ? t('auth.registerBtn') : t('auth.loginBtn'))
 
@@ -66,6 +68,10 @@ const submit = () => {
     .then(response => {
       if(response.data.token) {
         localStorage.setItem(process.env.AUTH_TOKEN_KEY, response.data.token)
+        userStore.initalizeUser()
+        window.location = '/user/profile'
+      } else {
+        router.push('/auth/login')
       }
     })
 }
