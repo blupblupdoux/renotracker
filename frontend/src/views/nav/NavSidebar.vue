@@ -20,12 +20,13 @@
 
     <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.12)"></div>
 
-    <q-list padding>
+    <!-- Display only if in 'project mode' -->
+    <!-- <q-list padding>
       <nav-sidebar-item v-for="item in specificsItems" 
         :key="'specificsItems-' + item.label"
         :item="item">
       </nav-sidebar-item>
-    </q-list>
+    </q-list> -->
   </div>
   
   <img src="../../assets/renotracker-logo-linear-trim.png" class="sidebar-logo" />
@@ -46,7 +47,7 @@ const route = useRoute()
 const drawer = computed(() => !route.path.includes('auth') && route.name !== 'notFound')
 
 const mainItems = [
-  {label: t('nav.projects'), link: "", icon: "r_handyman"},
+  {label: t('nav.projects'), link: "/projects", icon: "r_handyman"},
   {label: t('nav.tools'), link: "", icon: "r_build"},
 ]
 
