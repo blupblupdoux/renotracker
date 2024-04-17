@@ -1,7 +1,6 @@
 <template>
 <q-drawer
-  v-model="drawer"
-  show-if-above
+  :show-if-above="drawer"
   :width="200"
   :breakpoint="400"
   
@@ -36,9 +35,15 @@
 <script setup>
 import NavSidebarHeader from './NavSidebarHeader.vue';
 import NavSidebarItem from './NavSidebarItem.vue';
+import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { computed } from 'vue';
 
 const { t } = useI18n()
+const route = useRoute()
+
+// Display or not the menu
+const drawer = computed(() => !route.path.includes('auth') && route.name !== 'notFound')
 
 const mainItems = [
   {label: t('nav.projects'), link: "", icon: "r_handyman"},

@@ -29,6 +29,7 @@ const getSize = computed(() => (props.size ? "input-" + props.size : ""));
   display: flex;
   flex-direction: column;
   color: $light;
+  margin-bottom: 1rem;
 
   label {
     padding-left: 0.2rem;
