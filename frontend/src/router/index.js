@@ -31,11 +31,14 @@ export default route(function (/* { store, ssrContext } */) {
 
     const userStore = useUserStore()
 
+    // Initialize the user if needed
+    if(from.path === '/') await userStore.initalizeUser()
+
     if(!to.path.includes('auth') && !userStore.user) {
       next('/auth/login')
+    } else {
+      next()
     }
-
-    next()
   })
 
   return Router

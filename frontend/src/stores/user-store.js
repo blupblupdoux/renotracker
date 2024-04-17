@@ -7,11 +7,14 @@ export const useUserStore = defineStore('user', () => {
   const user = ref(null);
   const token = localStorage.getItem(process.env.AUTH_TOKEN_KEY)
 
-  const initalizeUser = () => {
-    if(token) {
-      api.get('/api/user/current')
-      .then(response => user.value = response.data)
-      .catch(error => console.error(error))
+  const initalizeUser = async () => {
+    try {
+      if(token) {
+        const response = await api.get('/api/user/current')
+        user.value = response.data
+      }
+    } catch (error) {
+      console.error(error)
     }
   }
 
