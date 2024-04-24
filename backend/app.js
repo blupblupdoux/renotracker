@@ -1,6 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
 
+const authMiddleware = require('./middlewares/auth')
+
 const authRoutes = require('./routes/auth')
 const userRoutes = require('./routes/user')
 const projectRoutes = require('./routes/project')
@@ -19,6 +21,8 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 })
+
+app.use(authMiddleware)
 
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
