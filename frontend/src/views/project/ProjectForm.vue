@@ -1,6 +1,6 @@
 <template>
   <right-drawer :title="t('project.createProject')">
-    <q-form>
+    <q-form @submit="submit">
       <input-custom v-model="form.name" 
         :label="t('auth.nameField')"
         required>
@@ -13,7 +13,8 @@
       </input-custom>
 
       <input-custom v-model="form.budget" 
-        :label="t('project.budgetField')"
+        :label="t('project.budgetField') + ' (€)'"
+        type="number"
       >
       </input-custom>
 
@@ -30,8 +31,11 @@ import InputCustom from '../common/InputCustom.vue'
 
 import {reactive} from 'vue'
 import { useI18n } from "vue-i18n";
+import { useUserStore } from "src/stores/user-store";
+import { api } from 'src/boot/axios'
 
 const {t} = useI18n()
+const userStore = useUserStore()
 
 const form = reactive({
   _userId: "",
@@ -39,4 +43,9 @@ const form = reactive({
   description: "",
   budget: ""
 });
+
+const submit = () => {
+  form._userId = userStore.user._id
+  api.post('/api/project/create', form)
+}
 </script>
