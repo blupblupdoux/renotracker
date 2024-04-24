@@ -33,9 +33,11 @@ import {reactive} from 'vue'
 import { useI18n } from "vue-i18n";
 import { useUserStore } from "src/stores/user-store";
 import { api } from 'src/boot/axios'
+import { useProjectStore } from 'src/stores/project-store';
 
 const {t} = useI18n()
 const userStore = useUserStore()
+const projectStore = useProjectStore()
 
 const form = reactive({
   _userId: "",
@@ -47,5 +49,7 @@ const form = reactive({
 const submit = () => {
   form._userId = userStore.user._id
   api.post('/api/project/create', form)
+    .then(response => projectStore.addProjetToList(response.data))
+    .catch(error => console.error(error))
 }
 </script>

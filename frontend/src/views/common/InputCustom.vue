@@ -9,12 +9,14 @@
       :type="props.type" 
       :required="required" 
       v-model="model" 
+      :placeholder="placeholder"
       class="input-custom" />
 
     <input v-else 
       :type="props.type" 
       :required="required" 
       v-model="model" 
+      :placeholder="placeholder"
       class="input-custom"/>
   </div>
 </template>
@@ -26,6 +28,7 @@ const props = defineProps({
   size: { type: String, default: "" },
   label: { type: String, default: "" },
   type: { type: String, default: "text" },
+  placeholder: { type: String, default: "" },
   required: { type: Boolean, default: false },
 });
 

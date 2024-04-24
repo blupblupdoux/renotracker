@@ -1,6 +1,6 @@
 <template>
   <q-drawer
-    v-model="drawer"
+    v-model="model"
     :width="400"
     :breakpoint="500"
     side="right"
@@ -29,13 +29,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 
 const props = defineProps({title: String})
+const model = defineModel()
 
 const closeDrawer = () => {
-  console.log('CLOSE DRAWER')
+  model.value = false
 }
-
-let drawer = ref(true)
 </script>
