@@ -2,6 +2,10 @@
 // so you can safely delete all default props below
 
 export default {
+  common: {
+    createBtn: 'Créer',
+    cancelBtn: 'Annuler'
+  },
   auth: {
     registerTitle: 'Créer un compte',
     nameField: 'Nom',
@@ -30,5 +34,10 @@ export default {
     myProfile: 'Mon profile',
     registeredAt: 'Compte créé le : ',
     updatedAt: 'Compte modifié le : ',
+  },
+  project: {
+    createProject: 'Créer un projet',
+    descriptionField: 'Description',
+    budgetField: 'Budget',
   }
 }

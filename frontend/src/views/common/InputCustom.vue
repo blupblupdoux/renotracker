@@ -5,7 +5,17 @@
       <span v-if="required">*</span>
     </label>
 
-    <input :type="props.type" :required="required" v-model="model" />
+    <textarea v-if="type === 'textarea'" 
+      :type="props.type" 
+      :required="required" 
+      v-model="model" 
+      class="input-custom" />
+
+    <input v-else 
+      :type="props.type" 
+      :required="required" 
+      v-model="model" 
+      class="input-custom"/>
   </div>
 </template>
 
@@ -39,8 +49,8 @@ const getSize = computed(() => (props.size ? "input-" + props.size : ""));
     text-transform: uppercase;
   }
 
-  input,
-  input:focus {
+  .input-custom,
+  .input-custom:focus {
     border: 1px solid $light;
     border-radius: 7px;
     outline: $primary;

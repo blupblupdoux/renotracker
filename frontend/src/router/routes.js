@@ -1,5 +1,4 @@
 const routes = [
-
   {
     path: '/auth',
     children: [
