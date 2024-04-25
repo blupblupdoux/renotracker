@@ -41,18 +41,20 @@ const projectStore = useProjectStore()
 
 const model = defineModel()
 
-const form = reactive({
+const formObject = {
   _userId: "",
   name: "",
   description: "",
   budget: ""
-});
+}
+const form = reactive({...formObject});
 
 const submit = () => {
   form._userId = userStore.user._id
   api.post('/api/project/create', form)
     .then(response => {
       projectStore.addProjetToList(response.data)
+      Object.assign(form, formObject);
       model.value = false
     })
     .catch(error => console.error(error))
