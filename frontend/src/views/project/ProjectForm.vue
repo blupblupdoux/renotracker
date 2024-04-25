@@ -1,5 +1,5 @@
 <template>
-  <right-drawer :title="t('project.createProject')">
+  <right-drawer v-model="model" :title="t('project.createProject')">
     <q-form @submit="submit">
       <input-custom v-model="form.name" 
         :label="t('auth.nameField')"
@@ -39,6 +39,8 @@ const {t} = useI18n()
 const userStore = useUserStore()
 const projectStore = useProjectStore()
 
+const model = defineModel()
+
 const form = reactive({
   _userId: "",
   name: "",
@@ -49,7 +51,10 @@ const form = reactive({
 const submit = () => {
   form._userId = userStore.user._id
   api.post('/api/project/create', form)
-    .then(response => projectStore.addProjetToList(response.data))
+    .then(response => {
+      projectStore.addProjetToList(response.data)
+      model.value = false
+    })
     .catch(error => console.error(error))
 }
 </script>
