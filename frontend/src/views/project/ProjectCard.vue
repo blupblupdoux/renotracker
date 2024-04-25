@@ -16,6 +16,6 @@ const props = defineProps({project: Object})
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
-  width: 40%;
+  width: 49%;
 }
 </style>

@@ -1,13 +1,15 @@
 <template>
   <project-form v-model="drawer"></project-form>
 
-  <div class="row items-center">
-    <input-custom placeholder="Search" size="md" class="q-mr-md" style=" margin-bottom: 0;"></input-custom>
-    <q-btn push color="primary" text-color="white" @click="drawer = true" :label="'test'"></q-btn>
+  <h2>{{ t('nav.projects') }}</h2>
+
+  <div class="row items-center q-mb-lg">
+    <input-custom v-model="query" :placeholder="t('common.search')" size="lg" class="q-mr-md" style=" margin-bottom: 0;"></input-custom>
+    <q-btn push color="primary" text-color="white" @click="drawer = true" :label="t('project.newProjectBtn')"></q-btn>
   </div>
 
-  <div>
-    <project-card v-for="project in projectStore.projects" 
+  <div class="row justify-between">
+    <project-card v-for="project in projectsFiltered" 
       :key="'project-card-' + project._id"
       :project="project">
     </project-card>
@@ -15,16 +17,24 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { api } from 'src/boot/axios';
 import { useProjectStore } from 'src/stores/project-store.js'
 
 import ProjectForm from '../project/ProjectForm.vue'
 import ProjectCard from '../project/ProjectCard.vue'
 import InputCustom from '../common/InputCustom.vue';
+import { useI18n } from 'vue-i18n';
 
+const {t} = useI18n()
 const projectStore = useProjectStore()
 let drawer = ref(false)
+let query = ref('')
+
+const projectsFiltered = computed(() => {
+  if(!query.value) return projectStore.projects
+  return projectStore.projects.filter(project => project.name.toLowerCase().includes(query.value.toLocaleLowerCase()))
+})
 
 onMounted(() => {
   api.get('/api/project/all')

@@ -4,7 +4,8 @@
 export default {
   common: {
     createBtn: 'Créer',
-    cancelBtn: 'Annuler'
+    cancelBtn: 'Annuler',
+    search: 'Rechercher'
   },
   auth: {
     registerTitle: 'Créer un compte',
@@ -37,6 +38,7 @@ export default {
   },
   project: {
     createProject: 'Créer un projet',
+    newProjectBtn: 'Nouveau projet',
     descriptionField: 'Description',
     budgetField: 'Budget',
   }
