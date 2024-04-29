@@ -16,6 +16,7 @@ const routes = [
   },
   {
     path: '/project/:id',
+    props: true,
     component: () => import('../views/pages/ProjectDashboard.vue')
   },
 
