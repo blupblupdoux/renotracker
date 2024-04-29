@@ -9,7 +9,6 @@ export const useProjectStore = defineStore('project', () => {
 
   const currentProject = computed(() => {
     const results = projects.value.filter(project => project._id === currentProjectId.value)
-    console.log(results)
     return results.length > 0 ? results[0] : null 
   })
 
