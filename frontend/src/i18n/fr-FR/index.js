@@ -41,5 +41,12 @@ export default {
     newProjectBtn: 'Nouveau projet',
     descriptionField: 'Description',
     budgetField: 'Budget',
+    projectTitle: 'Projet - ',
+    myProject: 'Mon projet',
+    budget: 'Budget',
+    subProjects: 'Sous projets',
+    products: 'Produits',
+    stats: 'Statistiques',
+    projectParams: 'Paramètres projet',
   }
 }
