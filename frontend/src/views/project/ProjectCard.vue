@@ -1,7 +1,7 @@
 <template>
   <router-link :to="'/project/' + project._id" class="project-card column justify-around">
-    <div class="project-card-title">{{ project.name }}</div>
-    <div class="project-card-description">{{ project.description }}</div>
+    <div class="project-card-title sub-title text-dark">{{ project.name }}</div>
+    <div class="project-card-description txt-light">{{ project.description }}</div>
     <div class="project-card-budget">{{ budgetFormatted(project.budget) }}</div>
   </router-link>
 </template>
@@ -23,15 +23,10 @@ const budgetFormatted =  (budget) => new Intl.NumberFormat('fr-fr', { style: 'cu
 }
 
 .project-card-title {
-  font-size: 1.3rem;
-  font-weight: 400;
   text-align: center;
-  color: $dark;
 }
 
 .project-card-description {
-  font-weight: 300;
-  color: $light;
   text-align: center;
 }
 

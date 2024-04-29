@@ -9,12 +9,12 @@
 
     <div class="row justify-between">
       <div class="p-dash-my-project">
-        <div>{{ t('project.myProject') }}</div>
-        <div>{{ project.description }}</div>
+        <div class="sub-title">{{ t('project.myProject') }}</div>
+        <div class="txt-light q-mt-md">{{ project.description }}</div>
       </div>
 
       <div class="p-dash-budget">
-        <div>{{ t('project.budget') }}</div>
+        <div class="sub-title text-negative">{{ t('project.budget') }}</div>
         <div> TEST</div>
       </div>
     </div>
@@ -55,5 +55,6 @@ onMounted(async () => {
   border-radius: 8px;
   width: 49%;
   height: 10rem;
+  padding: 1.5rem 2rem
 }
 </style>
