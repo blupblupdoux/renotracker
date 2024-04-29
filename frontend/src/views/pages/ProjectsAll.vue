@@ -20,11 +20,11 @@
 import { computed, onMounted, ref } from 'vue';
 import { api } from 'src/boot/axios';
 import { useProjectStore } from 'src/stores/project-store.js'
+import { useI18n } from 'vue-i18n';
 
 import ProjectForm from '../project/ProjectForm.vue'
 import ProjectCard from '../project/ProjectCard.vue'
 import InputCustom from '../common/InputCustom.vue';
-import { useI18n } from 'vue-i18n';
 
 const {t} = useI18n()
 const projectStore = useProjectStore()
