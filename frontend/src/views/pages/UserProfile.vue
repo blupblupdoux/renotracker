@@ -1,6 +1,6 @@
 <template>
 
-  <h2>{{ t('profile.myProfile').toUpperCase() }}</h2>
+  <h2>{{ t('profile.myProfile') }}</h2>
 
   <div id="profilePage">
     <div class="row items-center q-mb-md">

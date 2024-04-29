@@ -3,11 +3,13 @@
     <q-layout >
       <nav-sidebar> </nav-sidebar>
 
-      <q-page-container>
-        <q-page padding>
-          <router-view />
-        </q-page>
-      </q-page-container>
+      <q-scroll-area style="height: 100vh; max-width: 100%;">
+        <q-page-container>
+          <q-page class="q-pa-lg">
+            <router-view />
+          </q-page>
+        </q-page-container>
+      </q-scroll-area>
     </q-layout>
   </div>
 </template>
@@ -16,14 +18,11 @@
 import NavSidebar from './views/nav/NavSidebar.vue'
 import { useRouter } from 'vue-router';
 import { ref, onMounted } from 'vue';
-import { useUserStore } from 'src/stores/user-store';
 
 const router = useRouter()
 const isReady = ref(false)
-const userStore = useUserStore()
 
 onMounted(() => {
-  userStore.initalizeUser()
   router.isReady().then(() => isReady.value = true)
 })
 </script>
