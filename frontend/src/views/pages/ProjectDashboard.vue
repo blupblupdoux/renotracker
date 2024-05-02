@@ -8,14 +8,14 @@
     </h2>
 
     <div class="row justify-between">
-      <div class="p-dash-my-project">
-        <div class="sub-title">{{ t('project.myProject') }}</div>
-        <div class="txt-light q-mt-md">{{ project.description }}</div>
+      <div class="p-dash-my-project row">
+        <div class="sub-title q-mb-md">{{ t('project.myProject') }}</div>
+        <div class="txt-light">{{ project.description }}</div>
       </div>
 
-      <div class="p-dash-budget">
-        <div class="sub-title text-negative">{{ t('project.budget') }}</div>
-        <div> TEST</div>
+      <div class="p-dash-budget row">
+        <div class="sub-title q-mb-md">{{ t('project.budget') }}</div>
+        <budget-progress-bar :total="project.budget" :spent="70000"></budget-progress-bar>
       </div>
     </div>
 
@@ -30,6 +30,7 @@ import { useI18n } from 'vue-i18n';
 
 import LoaderDefault from '../common/LoaderDefault.vue';
 import ProjectNavTiles from '../project/ProjectNavTiles.vue';
+import BudgetProgressBar from '../common/BudgetProgressBar.vue'
 
 const props = defineProps({id: String})
 const {t} = useI18n()
@@ -54,7 +55,7 @@ onMounted(async () => {
   background-color: white;
   border-radius: 8px;
   width: 49%;
-  height: 10rem;
+  //height: 10rem;
   padding: 1.5rem 2rem
 }
 </style>

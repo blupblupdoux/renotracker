@@ -5,7 +5,7 @@ export default {
   common: {
     createBtn: 'Créer',
     cancelBtn: 'Annuler',
-    search: 'Rechercher'
+    search: 'Rechercher',
   },
   auth: {
     registerTitle: 'Créer un compte',
@@ -35,6 +35,10 @@ export default {
     myProfile: 'Mon profile',
     registeredAt: 'Compte créé le : ',
     updatedAt: 'Compte modifié le : ',
+  },
+  budget: {
+    total: 'Total : ',
+    remaining: 'Restant : '
   },
   project: {
     createProject: 'Créer un projet',

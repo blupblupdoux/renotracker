@@ -36,6 +36,8 @@ export default route(function (/* { store, ssrContext } */) {
 
     if(!to.path.includes('auth') && !userStore.user) {
       next('/auth/login')
+    } else if(to.path === '/') {
+      next('/projects')
     } else {
       next()
     }

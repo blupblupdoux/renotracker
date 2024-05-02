@@ -7,8 +7,11 @@
 </template>
 
 <script setup>
+import { currencyBeautiful } from 'src/composables/Formatter'
+
 const props = defineProps({project: Object})
-const budgetFormatted =  (budget) => new Intl.NumberFormat('fr-fr', { style: 'currency', currency: 'EUR' }).format(budget)
+
+const budgetFormatted =  (budget) => currencyBeautiful(budget)
 </script>
 
 <style lang="scss">
