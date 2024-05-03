@@ -53,7 +53,7 @@ const submit = () => {
   form._userId = userStore.user._id
   api.post('/api/project/create', form)
     .then(response => {
-      projectStore.addProjetToList(response.data)
+      projectStore.addProjectToList(response.data)
       Object.assign(form, formObject);
       model.value = false
     })

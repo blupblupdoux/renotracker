@@ -1,14 +1,17 @@
 <template>
-  <div class="project-card column justify-around">
-    <div class="project-card-title">{{ project.name }}</div>
-    <div class="project-card-description">{{ project.description }}</div>
+  <router-link :to="'/project/' + project._id" class="project-card column justify-around">
+    <div class="project-card-title sub-title text-dark">{{ project.name }}</div>
+    <div class="project-card-description txt-light">{{ project.description }}</div>
     <div class="project-card-budget">{{ budgetFormatted(project.budget) }}</div>
-  </div>
+  </router-link>
 </template>
 
 <script setup>
+import { currencyBeautiful } from 'src/composables/Formatter'
+
 const props = defineProps({project: Object})
-const budgetFormatted =  (budget) => new Intl.NumberFormat('fr-fr', { style: 'currency', currency: 'EUR' }).format(budget)
+
+const budgetFormatted =  (budget) => currencyBeautiful(budget)
 </script>
 
 <style lang="scss">
@@ -18,18 +21,15 @@ const budgetFormatted =  (budget) => new Intl.NumberFormat('fr-fr', { style: 'cu
   padding: 1rem 2rem;
   margin-bottom: 1rem;
   width: 49%;
-  height: 10rem
+  height: 10rem;
+  text-decoration: none;
 }
 
 .project-card-title {
-  font-size: 1.3rem;
-  font-weight: 400;
   text-align: center;
 }
 
 .project-card-description {
-  font-weight: 300;
-  color: $light;
   text-align: center;
 }
 
