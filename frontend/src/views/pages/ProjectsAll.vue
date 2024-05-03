@@ -2,11 +2,12 @@
   <project-form v-model="drawer"></project-form>
 
   <h2>{{ t('nav.projects') }}</h2>
-
-  <div class="row items-center q-mb-lg">
-    <input-custom v-model="query" :placeholder="t('common.search')" size="lg" class="q-mr-md" style=" margin-bottom: 0;"></input-custom>
-    <q-btn push color="primary" text-color="white" @click="drawer = true" :label="t('project.newProjectBtn')"></q-btn>
-  </div>
+  
+  <search-bar v-model="query" 
+    :placeholder="t('common.search')" 
+    :btnLabel="t('project.newProjectBtn')"
+    @on-btn-click="() => drawer = true">
+  </search-bar>
 
   <div class="row justify-between">
     <project-card v-for="project in projectsFiltered" 
@@ -24,7 +25,7 @@ import { useI18n } from 'vue-i18n';
 
 import ProjectForm from '../project/ProjectForm.vue'
 import ProjectCard from '../project/ProjectCard.vue'
-import InputCustom from '../common/InputCustom.vue';
+import SearchBar from '../common/SearchBar.vue'
 
 const {t} = useI18n()
 const projectStore = useProjectStore()

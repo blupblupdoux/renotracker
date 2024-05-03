@@ -52,5 +52,8 @@ export default {
     products: 'Produits',
     stats: 'Statistiques',
     projectParams: 'Paramètres projet',
+  },
+  subProject: {
+    newSubProjectBtn: 'Nouveau sous-projet',
   }
 }
