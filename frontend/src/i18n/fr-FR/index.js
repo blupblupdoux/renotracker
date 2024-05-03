@@ -55,5 +55,6 @@ export default {
   },
   subProject: {
     newSubProjectBtn: 'Nouveau sous-projet',
+    createSubProject: 'Créer un sous-projet'
   }
 }

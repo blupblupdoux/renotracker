@@ -8,14 +8,12 @@
 
       <input-custom v-model="form.description" 
         :label="t('project.descriptionField')"
-        type="textarea"
-      >
+        type="textarea">
       </input-custom>
 
       <input-custom v-model="form.budget" 
         :label="t('project.budgetField') + ' (€)'"
-        type="number"
-      >
+        type="number">
       </input-custom>
 
       <div class="row justify-end q-pt-md">
