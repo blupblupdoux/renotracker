@@ -18,8 +18,10 @@
 
       <input-custom v-model="form.priority"
         type="select"
-        :label="'coucou'"
-        :options="['test 1', 'test 2']">
+        :label="t('subProject.priority')"
+        :options="priority"
+      >
+        <template #option="data">{{ t('subProject.priority_' + data.option.key) }}</template>
       </input-custom>
 
       <div class="row justify-end q-pt-md">
@@ -37,15 +39,23 @@ import {reactive} from 'vue'
 import { useI18n } from "vue-i18n";
 import { api } from 'src/boot/axios'
 import { useProjectStore } from 'src/stores/project-store';
+import { useSubProjectStore } from 'src/stores/subProject-store';
 import { priority } from '../../../../constantes/dbFieldsOptions.js'
 
 const {t} = useI18n()
-const subProjectStore = useProjectStore()
+const projectStore = useProjectStore()
+const subProjectStore = useSubProjectStore()
 const model = defineModel()
 
 const form = reactive({});
 
 const submit = () => {
-  
+  form._projectId = projectStore.currentProjectId
+  api.post('/api/subProject/create', form)
+    .then(response => {
+      console.log(response.data)
+      model.value = false
+    })
+    .catch(error => console.error(error))
 }
 </script>

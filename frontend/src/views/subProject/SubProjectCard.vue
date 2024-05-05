@@ -1,6 +1,6 @@
 <template>
   <div>
-    coucou
+    {{ subProject.name }}
   </div>
 </template>
 
