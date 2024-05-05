@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="'/project/' + project._id" class="project-card column justify-around">
+  <router-link :to="'/project/' + project._id" class="card project-card column justify-around">
     <div class="project-card-title sub-title text-dark">{{ project.name }}</div>
     <div class="project-card-description txt-light">{{ project.description }}</div>
     <div class="project-card-budget">{{ budgetFormatted(project.budget) }}</div>
@@ -16,9 +16,6 @@ const budgetFormatted =  (budget) => currencyBeautiful(budget)
 
 <style lang="scss">
 .project-card {
-  background-color: white;
-  border-radius: 8px;
-  padding: 1rem 2rem;
   margin-bottom: 1rem;
   width: 49%;
   height: 10rem;

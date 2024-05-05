@@ -4,3 +4,9 @@ export const priority = [
   {value: 2, key: 'high'},
   {value: 3, key: 'urgent'}
 ]
+
+export const subProjectStatus = [
+  {value: 0, key: 'todo'},
+  {value: 1, key: 'started'},
+  {value: 2, key: 'finished'},
+]
