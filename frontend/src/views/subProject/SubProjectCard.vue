@@ -1,5 +1,5 @@
 <template>
-  <router-link to="#" class="col-12 col-md-6 col-lg-4 q-px-sm" style="  text-decoration: none;">
+  <router-link :to="'/subProject/' + subProject._id" class="col-12 col-md-6 col-lg-4 q-px-sm" style="  text-decoration: none;">
     <div class="subProject-card card column items-stretch justify-between">
       <div class="sub-title text-dark q-mb-md">{{ subProject.name }}</div>
       <div class="txt-light q-mb-md">{{ getDescription }}</div>
@@ -38,5 +38,7 @@ const getStatusColor = computed(() => 'bg-' + getStatus.value.color)
 .subProject-status {
   border-radius: 5px;
   padding: .2rem .5rem;
+  color: white;
+  font-weight: 400;
 }
 </style>

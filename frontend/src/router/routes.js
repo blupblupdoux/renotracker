@@ -23,6 +23,11 @@ const routes = [
       { path: 'subProjects', component: () => import('../views/pages/SubProjectsAll.vue')}
     ]
   },
+  {
+    path: '/subProject/:id',
+    props: true,
+    component: () => import('../views/pages/SubProjectDashboard.vue'),
+  },
 
   // Always leave this as last one,
   // but you can also remove it
