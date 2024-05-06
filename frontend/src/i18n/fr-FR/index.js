@@ -56,10 +56,14 @@ export default {
   subProject: {
     newSubProjectBtn: 'Nouveau sous-projet',
     createSubProject: 'Créer un sous-projet',
+    noDescription: 'Pas de description',
     priority: 'Priorité',
     priority_low: 'Faible',
     priority_medium: 'Moyen',
     priority_high: 'Haut',
     priority_urgent: 'Urgent',
+    status_todo : 'Non commencé',
+    status_started : 'En cours',
+    status_finished : 'Terminé',
   }
 }

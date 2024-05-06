@@ -53,7 +53,7 @@ const submit = () => {
   form._projectId = projectStore.currentProjectId
   api.post('/api/subProject/create', form)
     .then(response => {
-      console.log(response.data)
+      subProjectStore.addSubProjectToList(response.data)
       model.value = false
     })
     .catch(error => console.error(error))

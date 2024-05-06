@@ -9,7 +9,7 @@
     @on-btn-click="drawer = true">
   </search-bar>
 
-  <div class="row justify-between">
+  <div class="row">
     <sub-project-card v-for="subProject in subProjectsFiltered" 
       :key="'subProject-card-' + subProject._id"
       :sub-project="subProject">
