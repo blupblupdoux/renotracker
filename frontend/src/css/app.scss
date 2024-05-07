@@ -37,7 +37,9 @@ h3 {
 }
 
 .link, .link:visited {
-  color: $secondary
+  cursor: pointer;
+  text-decoration: underline;
+  color: $secondary;
 }
 
 .card {

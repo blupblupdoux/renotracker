@@ -65,5 +65,15 @@ export default {
     status_todo : 'Non commencé',
     status_started : 'En cours',
     status_finished : 'Terminé',
+  },
+  purchase: {
+    createPurchase: 'Créer un achat',
+    newPurchaseBtn: 'Nouveau achat',
+    quantityField: 'Quantité',
+    unitField: 'Unité',
+    priceField: 'Prix total',
+    storeField: 'Magasin',
+    purchasedAtField: 'Acheté le',
+    noteField: 'Note',
   }
 }

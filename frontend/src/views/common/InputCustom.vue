@@ -1,8 +1,10 @@
 <template>
   <div :class="['input-custom-group', getSize]">
     <label>
-      {{ props.label.toLowerCase() }}
-      <span v-if="required">*</span>
+      <slot>
+        {{ props.label.toLowerCase() }}
+        <span v-if="required">*</span>
+      </slot>
     </label>
 
     <textarea v-if="type === 'textarea'"  
