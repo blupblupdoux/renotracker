@@ -5,19 +5,24 @@
       <span v-if="required">*</span>
     </label>
 
-    <textarea v-if="type === 'textarea'" 
-      :type="props.type" 
-      :required="required" 
-      v-model="model" 
+    <textarea v-if="type === 'textarea'"  
+      v-model="modelBinding" 
       :placeholder="placeholder"
       class="input-custom" />
+
+    <select v-else-if="type === 'select'" v-model="modelBinding" class="input-custom">
+      <option v-for="option in options" :key="option.key" :value="option.value">
+        <slot name="option" :option="option">{{ option.key }}</slot>
+      </option>
+    </select>
 
     <input v-else 
       :type="props.type" 
       :required="required" 
-      v-model="model" 
+      v-model="modelBinding" 
       :placeholder="placeholder"
       class="input-custom"/>
+
   </div>
 </template>
 
@@ -28,11 +33,21 @@ const props = defineProps({
   size: { type: String, default: "" },
   label: { type: String, default: "" },
   type: { type: String, default: "text" },
+  options: Array,
   placeholder: { type: String, default: "" },
   required: { type: Boolean, default: false },
 });
 
 const model = defineModel();
+
+const modelBinding = computed({
+  get() {
+    return model.value
+  },
+  set(newValue) {
+    model.value = newValue
+  }
+})
 
 const getSize = computed(() => (props.size ? "input-" + props.size : ""));
 </script>

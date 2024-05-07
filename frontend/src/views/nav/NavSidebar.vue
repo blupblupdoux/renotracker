@@ -53,10 +53,12 @@ const mainItems = [
   {label: t('nav.tools'), link: "", icon: "r_build"},
 ]
 
+const projectPrefix = computed(() => `/project/${projectStore.currentProjectId}`)
+
 const specificsItems = computed(() => {
   return [
-    {label: t('nav.dashboard'), link: `/project/${projectStore.currentProjectId}`, icon: "r_dashboard"},
-    {label: t('nav.subProjects'), link: "", icon: "chair"},
+    {label: t('nav.dashboard'), link: projectPrefix.value, icon: "r_dashboard"},
+    {label: t('nav.subProjects'), link: projectPrefix.value + '/subProjects', icon: "chair"},
     {label: t('nav.purchases'), link: "", icon: "shopping_cart"},
     {label: t('nav.tags'), link: "", icon: "tag"},
     {label: t('nav.stats'), link: "", icon: "r_signal_cellular_alt"},
