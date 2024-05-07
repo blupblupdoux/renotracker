@@ -1,5 +1,4 @@
 <template>
-
   <right-drawer v-model="model" :title="t('purchase.createPurchase')">
     <q-form @submit="submit">
       <input-custom v-model="form.name" 
@@ -28,7 +27,7 @@
           class="col-6"
         >
           <span>{{ t('purchase.priceField') + ' (€)*' }}</span>
-          <span class="link q-ml-lg">Calculer</span>
+          <span class="link q-ml-lg">{{ t('purchase.calculate') }}</span>
         </input-custom>
 
         <div v-if="form.price && form.quantity" class="col-4 txt-light">
@@ -55,25 +54,36 @@
       </div>
     </q-form>
   </right-drawer>
-  
 </template>
 
 <script setup>
 import { reactive, computed } from "vue"
 import { useI18n } from "vue-i18n";
+import { useProjectStore } from "src/stores/project-store";
+import { api } from "src/boot/axios";
 
 import RightDrawer from '../common/RightDrawer.vue';
 import InputCustom from '../common/InputCustom.vue'
+import { usePurchaseStore } from "src/stores/purchase-store";
 
 const model = defineModel()
 const {t} = useI18n()
+const projectStore = useProjectStore()
+const purchaseStore = usePurchaseStore()
+
 const form = reactive({});
 
 const pricePerUnit = computed(() => form.price / form.quantity )
 const getUnit = computed(() => form.unit || t('purchase.unitField'))
 
 const submit = () => {
-
+  form._projectId = projectStore.currentProjectId
+  api.post('/api/purchase/create', form)
+    .then(response => {
+      purchaseStore.addPurchaseToList(response.data)
+      model.value = false
+    })
+    .catch(error => console.error(error))
 }
 
 </script>

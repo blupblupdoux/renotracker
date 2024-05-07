@@ -75,5 +75,6 @@ export default {
     storeField: 'Magasin',
     purchasedAtField: 'Acheté le',
     noteField: 'Note',
+    calculate: 'Calculer',
   }
 }

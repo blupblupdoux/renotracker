@@ -23,6 +23,7 @@
       :required="required" 
       v-model="modelBinding" 
       :placeholder="placeholder"
+      step="any"
       class="input-custom"/>
 
   </div>
