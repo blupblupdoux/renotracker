@@ -19,6 +19,7 @@
         </input-custom>
       </div>
 
+      <!-- Total price -->
       <div class="row justify-between items-center">
 
         <input-custom v-model="form.price" 
@@ -26,14 +27,17 @@
           required
           class="col-6"
         >
-          <span>{{ t('purchase.priceField') + ' (€)*' }}</span>
-          <span class="link q-ml-lg">{{ t('purchase.calculate') }}</span>
+          <span>{{ t('purchase.priceTotalField') + ' (€)*' }}</span>
+          <span @click="calculatePrice = !calculatePrice" class="link q-ml-lg">{{ t('purchase.calculate') }}</span>
         </input-custom>
 
         <div v-if="form.price && form.quantity" class="col-4 txt-light">
           {{ `${pricePerUnit} € / ${getUnit}` }}
         </div>
       </div>
+
+      <!-- Calculate price -->
+      <calculate-price-helper v-if="calculatePrice" v-model="form.price" :unit="getUnit" :total-quantity="form.quantity"></calculate-price-helper>
 
       <input-custom v-model="form.store" 
         :label="t('purchase.storeField')">
@@ -57,14 +61,16 @@
 </template>
 
 <script setup>
-import { reactive, computed } from "vue"
+import { reactive, ref, computed } from "vue"
 import { useI18n } from "vue-i18n";
 import { useProjectStore } from "src/stores/project-store";
 import { api } from "src/boot/axios";
+import { usePurchaseStore } from "src/stores/purchase-store";
 
 import RightDrawer from '../common/RightDrawer.vue';
 import InputCustom from '../common/InputCustom.vue'
-import { usePurchaseStore } from "src/stores/purchase-store";
+import CalculatePriceHelper from "./CalculatePriceHelper.vue";
+
 
 const model = defineModel()
 const {t} = useI18n()
@@ -72,6 +78,7 @@ const projectStore = useProjectStore()
 const purchaseStore = usePurchaseStore()
 
 const form = reactive({});
+let calculatePrice = ref(false)
 
 const pricePerUnit = computed(() => form.price / form.quantity )
 const getUnit = computed(() => form.unit || t('purchase.unitField'))
@@ -87,3 +94,20 @@ const submit = () => {
 }
 
 </script>
+
+<style lang="scss">
+.calculate-price {
+  border-radius: 8px;
+  padding: .5rem 1rem 0 1rem;
+  margin-bottom: 1rem;
+  background-color: $warning;
+}
+
+.price-help-input-1 .q-field__label {
+  margin-left: 24px;
+}
+
+.price-help-input-2 .q-field__label {
+  margin-left: 8px;
+}
+</style>

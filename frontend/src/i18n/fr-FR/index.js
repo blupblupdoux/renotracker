@@ -71,10 +71,14 @@ export default {
     newPurchaseBtn: 'Nouveau achat',
     quantityField: 'Quantité',
     unitField: 'Unité',
-    priceField: 'Prix total',
+    priceTotalField: 'Prix total',
+    priceField: 'Prix',
     storeField: 'Magasin',
     purchasedAtField: 'Acheté le',
     noteField: 'Note',
     calculate: 'Calculer',
+    calculatePrice: 'Calculer le prix total',
+    calculatePriceHelp_1: "J'ai payé",
+    calculatePriceHelp_2: 'pour',
   }
 }
