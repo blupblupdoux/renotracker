@@ -6,11 +6,11 @@
 
       <span>{{ t('purchase.calculatePriceHelp_1') }}</span>
 
-      <q-input v-model="priceBinding" :label="t('purchase.priceField')" class="price-help-input-1 col-3" dense />
+      <q-input v-model="priceBinding" :label="t('purchase.priceField')" type="number" step="any" class="price-help-input-1 col-3" dense />
 
       <span>{{ '€ ' + t('purchase.calculatePriceHelp_2') }}</span>
 
-      <q-input v-model="quantityBinding" :label="t('purchase.quantityField')" class="price-help-input-2 col-3" dense />
+      <q-input v-model="quantityBinding" :label="t('purchase.quantityField')" type="number" step="any" class="price-help-input-2 col-3" dense />
       
       <span>{{ unit }}</span>
     </div>
@@ -23,7 +23,7 @@ import {useI18n} from "vue-i18n"
 import {ref, computed} from 'vue'
 
 const model = defineModel()
-const props = defineProps({unit: String, totalQuantity: {type: Number, default: 1}})
+const props = defineProps({unit: String, totalQuantity: {type: [Number, String], default: 1}})
 const {t} = useI18n()
 
 let price = ref('')

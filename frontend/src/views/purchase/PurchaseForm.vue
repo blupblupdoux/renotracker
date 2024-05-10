@@ -39,8 +39,8 @@
       <!-- Calculate price -->
       <calculate-price-helper v-if="calculatePrice" v-model="form.price" :unit="getUnit" :total-quantity="form.quantity"></calculate-price-helper>
 
-      <input-custom v-model="form.store" 
-        :label="t('purchase.storeField')">
+      <input-custom v-model="form.shop" 
+        :label="t('purchase.shopField')">
       </input-custom>
 
       <input-custom v-model="form.purchased_at" 
@@ -77,7 +77,18 @@ const {t} = useI18n()
 const projectStore = useProjectStore()
 const purchaseStore = usePurchaseStore()
 
-const form = reactive({});
+const purchaseObject = {
+  _projectId: null,
+  name: null,
+  quantity: null,
+  unit: null,
+  price: null,
+  shop: null,
+  purchased_at: null,
+  note: null
+}
+
+const form = reactive({...purchaseObject});
 let calculatePrice = ref(false)
 
 const pricePerUnit = computed(() => form.price / form.quantity )
@@ -88,6 +99,7 @@ const submit = () => {
   api.post('/api/purchase/create', form)
     .then(response => {
       purchaseStore.addPurchaseToList(response.data)
+      Object.assign(form, purchaseObject);
       model.value = false
     })
     .catch(error => console.error(error))

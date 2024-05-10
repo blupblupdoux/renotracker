@@ -73,12 +73,13 @@ export default {
     unitField: 'Unité',
     priceTotalField: 'Prix total',
     priceField: 'Prix',
-    storeField: 'Magasin',
+    shopField: 'Magasin',
     purchasedAtField: 'Acheté le',
     noteField: 'Note',
     calculate: 'Calculer',
     calculatePrice: 'Calculer le prix total',
     calculatePriceHelp_1: "J'ai payé",
     calculatePriceHelp_2: 'pour',
+    recordPerPage: 'Lignes par page'
   }
 }
