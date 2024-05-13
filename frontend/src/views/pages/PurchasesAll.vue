@@ -10,12 +10,12 @@
     @on-btn-click="() => drawer = true">
 </search-bar>
 
-<purchases-table></purchases-table>
+<purchases-table :purchases="filteredPurchases"></purchases-table>
 
 </template>
 
 <script setup>
-import {ref, onMounted} from 'vue'
+import {ref, computed, onMounted} from 'vue'
 import {useI18n} from 'vue-i18n'
 import { api } from 'src/boot/axios'
 import { useProjectStore } from 'src/stores/project-store';
@@ -31,6 +31,14 @@ const purchaseStore = usePurchaseStore()
 
 let drawer = ref(false)
 let query = ref('')
+
+const filteredPurchases = computed(() => {
+  if(!query.value) return purchaseStore.purchases
+  return purchaseStore.purchases.filter(purchase => {
+    const queryFormated = query.value.toLowerCase()
+    return purchase.name.toLowerCase().includes(queryFormated) || (purchase.shop && purchase.shop.toLowerCase().includes(queryFormated))
+  })
+})
 
 onMounted(() => {
   api.get('/api/purchase/all', {params: {projectId: projectStore.currentProjectId}})
