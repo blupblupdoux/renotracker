@@ -58,7 +58,7 @@
       </input-custom>
 
       <div class="q-pt-md">
-        <q-btn v-if="isUpdateMode" push color="negative" text-color="white" :label="t('common.deleteBtn')" type="submit"/>
+        <q-btn v-if="isUpdateMode" @click="deletePurchase" push color="negative" text-color="white" :label="t('common.deleteBtn')"/>
         <q-btn push color="primary" text-color="white" :label="btnLabel" type="submit" style="float: right"/>
       </div>
     </q-form>
@@ -116,11 +116,19 @@ const submit = async () => {
       purchaseStore.addPurchaseToList(response.data)
     }
 
-    purchaseStore.updatePurchaseDrawer(false)
     onDrawerHide()
   } catch (error) {
     console.error(error)
   }
+}
+
+const deletePurchase = () => {
+  api.delete('/api/purchase/'+ purchaseStore.currentPurchaseId +'/delete')
+    .then(() => {
+      purchaseStore.removePurchaseFromList(purchaseStore.currentPurchaseId)
+      onDrawerHide()
+    })
+    .catch(error => console.error(error))
 }
 
 const onDrawerOpen = () => {
@@ -128,6 +136,7 @@ const onDrawerOpen = () => {
 }
 
 const onDrawerHide = () => {
+  purchaseStore.updatePurchaseDrawer(false)
   Object.assign(form, purchaseObject);
   purchaseStore.updateCurrentPurchaseId(null)
 }

@@ -12,11 +12,17 @@ exports.create = (req, res, next) => {
   const purchase = new Purchase(req.body)
   purchase.save()
     .then(() => res.status(200).json(purchase))
-    .catch(error => res.status(500).json({ error }));
+    .catch(error => res.status(400).json({ error }));
 }
 
 exports.updateOne = (req, res, next) => {
   Purchase.findByIdAndUpdate(req.body._id, {...req.body}, {new: true})
     .then((purchase) => res.status(200).json(purchase))
-    .catch(error => res.status(500).json({ error }));
+    .catch(error => res.status(400).json({ error }));
+}
+
+exports.deleteOne = (req, res, next) => {
+  Purchase.deleteOne({_id: req.params.id})
+    .then(() => res.status(200).json())
+    .catch(error => res.status(400).json({ error }));
 }
