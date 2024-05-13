@@ -5,62 +5,45 @@
     :title="formTitle"
   >
     <q-form @submit="submit">
-      <input-custom v-model="form.name" 
-        :label="t('auth.nameField')"
-        required>
-      </input-custom>
+      <!-- Name -->
+      <input-custom v-model="form.name" :label="t('auth.nameField')" required />
 
+      <!-- Quantity and Unit -->
       <div class="row justify-between">
-        <input-custom v-model="form.quantity" 
-          :label="t('purchase.quantityField')"
-          type="number"
-          class="col-5">
-        </input-custom>
-
-        <input-custom v-model="form.unit" 
-          :label="t('purchase.unitField')"
-          class="col-5">
-        </input-custom>
+        <input-custom v-model="form.quantity" :label="t('purchase.quantityField')" type="number" class="col-5" />
+        <input-custom v-model="form.unit" :label="t('purchase.unitField')" class="col-5" />
       </div>
 
       <!-- Total price -->
       <div class="row justify-between items-center">
 
-        <input-custom v-model="form.price" 
-          type="number"
-          required
-          class="col-6"
-        >
+        <input-custom v-model="form.price" type="number" required class="col-6" >
           <span>{{ t('purchase.priceTotalField') + ' (€)*' }}</span>
           <span @click="calculatePrice = !calculatePrice" class="link q-ml-lg">{{ t('purchase.calculate') }}</span>
         </input-custom>
 
-        <div v-if="form.price && form.quantity" class="col-4 txt-light">
-          {{ `${pricePerUnit} € / ${getUnit}` }}
-        </div>
+        <!-- Price per unit -->
+        <div v-if="form.price && form.quantity" class="col-4 txt-light">{{ `${pricePerUnit} € / ${getUnit}` }}</div>
       </div>
 
       <!-- Calculate price -->
       <calculate-price-helper v-if="calculatePrice" v-model="form.price" :unit="getUnit" :total-quantity="form.quantity"></calculate-price-helper>
 
-      <input-custom v-model="form.shop" 
-        :label="t('purchase.shopField')">
-      </input-custom>
+      <!-- Shop -->
+      <input-custom v-model="form.shop" :label="t('purchase.shopField')" />
 
-      <input-custom v-model="form.purchased_at" 
-        :label="t('purchase.purchasedAtField')"
-        type="date">
-      </input-custom>
+      <!-- Purchase At -->
+      <input-custom v-model="form.purchased_at" :label="t('purchase.purchasedAtField')" type="date" />
 
-      <input-custom v-model="form.note" 
-        :label="t('purchase.noteField')"
-        type="textarea">
-      </input-custom>
+      <!-- Note -->
+      <input-custom v-model="form.note" :label="t('purchase.noteField')" type="textarea" />
 
+      <!-- Buttons -->
       <div class="q-pt-md">
         <q-btn v-if="isUpdateMode" @click="deletePurchase" push color="negative" text-color="white" :label="t('common.deleteBtn')"/>
         <q-btn push color="primary" text-color="white" :label="btnLabel" type="submit" style="float: right"/>
       </div>
+      
     </q-form>
   </right-drawer>
 </template>
@@ -71,6 +54,7 @@ import { useI18n } from "vue-i18n";
 import { useProjectStore } from "src/stores/project-store";
 import { api } from "src/boot/axios";
 import { usePurchaseStore } from "src/stores/purchase-store";
+import { date } from 'quasar'
 
 import RightDrawer from '../common/RightDrawer.vue';
 import InputCustom from '../common/InputCustom.vue'
@@ -132,7 +116,10 @@ const deletePurchase = () => {
 }
 
 const onDrawerOpen = () => {
-  if(isUpdateMode.value) Object.assign(form, purchaseStore.currentPurchase);
+  if(isUpdateMode.value) { 
+    Object.assign(form, purchaseStore.currentPurchase)
+    form.purchased_at = date.formatDate(form.purchased_at, 'YYYY-MM-DD')
+  }
 }
 
 const onDrawerHide = () => {
