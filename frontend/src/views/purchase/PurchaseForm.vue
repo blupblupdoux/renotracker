@@ -116,6 +116,7 @@ const submit = async () => {
       purchaseStore.addPurchaseToList(response.data)
     }
 
+    purchaseStore.updatePurchaseDrawer(false)
     onDrawerHide()
   } catch (error) {
     console.error(error)

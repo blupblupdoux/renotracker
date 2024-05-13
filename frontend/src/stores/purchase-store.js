@@ -18,7 +18,8 @@ export const usePurchaseStore = defineStore('purchase', () => {
   const updateCurrentPurchaseId = (payload) => currentPurchaseId.value = payload
 
   const editPurchase = (payload) => {
-    console.log(payload)
+    const index = purchases.value.findIndex(p => p._id === payload._id)
+    purchases.value[index] = payload
   }
   
   return {
