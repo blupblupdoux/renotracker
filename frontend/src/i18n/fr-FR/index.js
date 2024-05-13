@@ -4,6 +4,8 @@
 export default {
   common: {
     createBtn: 'Créer',
+    updateBtn: 'Modifier',
+    deleteBtn: 'Supprimer',
     cancelBtn: 'Annuler',
     search: 'Rechercher',
   },
@@ -68,6 +70,7 @@ export default {
   },
   purchase: {
     createPurchase: 'Créer un achat',
+    updatePurchase: 'Modifier un achat',
     newPurchaseBtn: 'Nouveau achat',
     quantityField: 'Quantité',
     unitField: 'Unité',

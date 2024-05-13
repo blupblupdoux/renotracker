@@ -1,7 +1,8 @@
 <template>
   <right-drawer v-model="purchaseStore.purchaseDrawer" 
-    @show="onDrawerOpen" 
-    :title="t('purchase.createPurchase')"
+    @show="onDrawerOpen"
+    @hide="onDrawerHide" 
+    :title="formTitle"
   >
     <q-form @submit="submit">
       <input-custom v-model="form.name" 
@@ -56,15 +57,16 @@
         type="textarea">
       </input-custom>
 
-      <div class="row justify-end q-pt-md">
-        <q-btn push color="primary" text-color="white" :label="t('common.createBtn')" type="submit"/>
+      <div class="q-pt-md">
+        <q-btn v-if="isUpdateMode" push color="negative" text-color="white" :label="t('common.deleteBtn')" type="submit"/>
+        <q-btn push color="primary" text-color="white" :label="btnLabel" type="submit" style="float: right"/>
       </div>
     </q-form>
   </right-drawer>
 </template>
 
 <script setup>
-import { reactive, ref, computed, onMounted } from "vue"
+import { reactive, ref, computed } from "vue"
 import { useI18n } from "vue-i18n";
 import { useProjectStore } from "src/stores/project-store";
 import { api } from "src/boot/axios";
@@ -93,6 +95,11 @@ const purchaseObject = {
 const form = reactive({...purchaseObject});
 let calculatePrice = ref(false)
 
+const isUpdateMode = computed(() => !!purchaseStore.currentPurchaseId)
+
+const formTitle = computed(() => isUpdateMode.value ? t('purchase.updatePurchase') : t('purchase.createPurchase') )
+const btnLabel = computed(() => isUpdateMode.value ? t('common.updateBtn') : t('common.createBtn') )
+
 const pricePerUnit = computed(() => form.price / form.quantity )
 const getUnit = computed(() => form.unit || t('purchase.unitField'))
 
@@ -100,7 +107,7 @@ const submit = async () => {
   form._projectId = projectStore.currentProjectId
 
   try {
-    if(purchaseStore.currentPurchaseId) {
+    if(isUpdateMode.value) {
       const response = await api.put('/api/purchase/update', form)
       purchaseStore.editPurchase(response.data)
       purchaseStore.updateCurrentPurchaseId(null)
@@ -109,17 +116,19 @@ const submit = async () => {
       purchaseStore.addPurchaseToList(response.data)
     }
 
-    Object.assign(form, purchaseObject);
-    purchaseStore.updatePurchaseDrawer(false)
+    onDrawerHide()
   } catch (error) {
     console.error(error)
   }
 }
 
 const onDrawerOpen = () => {
-  if(purchaseStore.currentPurchaseId) {
-    Object.assign(form, purchaseStore.currentPurchase);
-  }
+  if(isUpdateMode.value) Object.assign(form, purchaseStore.currentPurchase);
+}
+
+const onDrawerHide = () => {
+  Object.assign(form, purchaseObject);
+  purchaseStore.updateCurrentPurchaseId(null)
 }
 
 </script>
