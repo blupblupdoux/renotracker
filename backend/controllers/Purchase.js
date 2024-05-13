@@ -8,8 +8,15 @@ exports.all = (req, res, next) => {
 
 exports.create = (req, res, next) => {
   delete req.body._id
+  if(!req.body.quantity) delete req.body.quantity
   const purchase = new Purchase(req.body)
   purchase.save()
     .then(() => res.status(200).json(purchase))
+    .catch(error => res.status(500).json({ error }));
+}
+
+exports.updateOne = (req, res, next) => {
+  Purchase.findByIdAndUpdate(req.body._id, {...req.body}, {new: true})
+    .then((purchase) => res.status(200).json(purchase))
     .catch(error => res.status(500).json({ error }));
 }

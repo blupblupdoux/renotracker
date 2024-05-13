@@ -1,13 +1,13 @@
 <template>
 
-<purchase-form v-model="drawer"></purchase-form>
+<purchase-form></purchase-form>
 
 <h2>{{ t('nav.purchases') }}</h2>
 
 <search-bar v-model="query" 
     :placeholder="t('common.search')" 
     :btnLabel="t('purchase.newPurchaseBtn')"
-    @on-btn-click="() => drawer = true">
+    @on-btn-click="purchaseStore.updatePurchaseDrawer(true)">
 </search-bar>
 
 <purchases-table :purchases="filteredPurchases"></purchases-table>
@@ -29,7 +29,6 @@ const {t} = useI18n()
 const projectStore = useProjectStore()
 const purchaseStore = usePurchaseStore()
 
-let drawer = ref(false)
 let query = ref('')
 
 const filteredPurchases = computed(() => {

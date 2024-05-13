@@ -1,5 +1,8 @@
 <template>
-  <right-drawer v-model="model" :title="t('purchase.createPurchase')">
+  <right-drawer v-model="purchaseStore.purchaseDrawer" 
+    @show="onDrawerOpen" 
+    :title="t('purchase.createPurchase')"
+  >
     <q-form @submit="submit">
       <input-custom v-model="form.name" 
         :label="t('auth.nameField')"
@@ -61,7 +64,7 @@
 </template>
 
 <script setup>
-import { reactive, ref, computed } from "vue"
+import { reactive, ref, computed, onMounted } from "vue"
 import { useI18n } from "vue-i18n";
 import { useProjectStore } from "src/stores/project-store";
 import { api } from "src/boot/axios";
@@ -72,7 +75,6 @@ import InputCustom from '../common/InputCustom.vue'
 import CalculatePriceHelper from "./CalculatePriceHelper.vue";
 
 
-const model = defineModel()
 const {t} = useI18n()
 const projectStore = useProjectStore()
 const purchaseStore = usePurchaseStore()
@@ -94,15 +96,30 @@ let calculatePrice = ref(false)
 const pricePerUnit = computed(() => form.price / form.quantity )
 const getUnit = computed(() => form.unit || t('purchase.unitField'))
 
-const submit = () => {
+const submit = async () => {
   form._projectId = projectStore.currentProjectId
-  api.post('/api/purchase/create', form)
-    .then(response => {
+
+  try {
+    if(purchaseStore.currentPurchaseId) {
+      const response = await api.put('/api/purchase/update', form)
+      purchaseStore.editPurchase(response.data)
+      purchaseStore.updateCurrentPurchaseId(null)
+    } else {
+      const response = await api.post('/api/purchase/create', form)
       purchaseStore.addPurchaseToList(response.data)
-      Object.assign(form, purchaseObject);
-      model.value = false
-    })
-    .catch(error => console.error(error))
+    }
+
+    Object.assign(form, purchaseObject);
+    purchaseStore.updatePurchaseDrawer(false)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const onDrawerOpen = () => {
+  if(purchaseStore.currentPurchaseId) {
+    Object.assign(form, purchaseStore.currentPurchase);
+  }
 }
 
 </script>
