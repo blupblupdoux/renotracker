@@ -43,7 +43,7 @@
         <q-btn v-if="isUpdateMode" @click="deletePurchase" push color="negative" text-color="white" :label="t('common.deleteBtn')"/>
         <q-btn push color="primary" text-color="white" :label="btnLabel" type="submit" style="float: right"/>
       </div>
-      
+
     </q-form>
   </right-drawer>
 </template>
@@ -51,15 +51,14 @@
 <script setup>
 import { reactive, ref, computed } from "vue"
 import { useI18n } from "vue-i18n";
-import { useProjectStore } from "src/stores/project-store";
+import { date } from 'quasar'
 import { api } from "src/boot/axios";
 import { usePurchaseStore } from "src/stores/purchase-store";
-import { date } from 'quasar'
+import { useProjectStore } from "src/stores/project-store";
 
 import RightDrawer from '../common/RightDrawer.vue';
 import InputCustom from '../common/InputCustom.vue'
 import CalculatePriceHelper from "./CalculatePriceHelper.vue";
-
 
 const {t} = useI18n()
 const projectStore = useProjectStore()
@@ -80,10 +79,8 @@ const form = reactive({...purchaseObject});
 let calculatePrice = ref(false)
 
 const isUpdateMode = computed(() => !!purchaseStore.currentPurchaseId)
-
 const formTitle = computed(() => isUpdateMode.value ? t('purchase.updatePurchase') : t('purchase.createPurchase') )
 const btnLabel = computed(() => isUpdateMode.value ? t('common.updateBtn') : t('common.createBtn') )
-
 const pricePerUnit = computed(() => form.price / form.quantity )
 const getUnit = computed(() => form.unit || t('purchase.unitField'))
 
