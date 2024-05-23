@@ -4,6 +4,8 @@
 export default {
   common: {
     createBtn: 'Créer',
+    updateBtn: 'Modifier',
+    deleteBtn: 'Supprimer',
     cancelBtn: 'Annuler',
     search: 'Rechercher',
   },
@@ -65,5 +67,22 @@ export default {
     status_todo : 'Non commencé',
     status_started : 'En cours',
     status_finished : 'Terminé',
+  },
+  purchase: {
+    createPurchase: 'Créer un achat',
+    updatePurchase: 'Modifier un achat',
+    newPurchaseBtn: 'Nouveau achat',
+    quantityField: 'Quantité',
+    unitField: 'Unité',
+    priceTotalField: 'Prix total',
+    priceField: 'Prix',
+    shopField: 'Magasin',
+    purchasedAtField: 'Acheté le',
+    noteField: 'Note',
+    calculate: 'Calculer',
+    calculatePrice: 'Calculer le prix total',
+    calculatePriceHelp_1: "J'ai payé",
+    calculatePriceHelp_2: 'pour',
+    recordPerPage: 'Lignes par page'
   }
 }
