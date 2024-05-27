@@ -19,7 +19,7 @@ const loaded = ref(false)
 
 onMounted(async () => {
   if(subProjectStore.subProjects.length === 0) {
-    await subProjectStore.fetchCurrentSubProject(props.subProjectId)
+    await subProjectStore.fetchSubProject(props.subProjectId)
   }
   loaded.value = true
 })

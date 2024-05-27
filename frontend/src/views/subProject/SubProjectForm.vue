@@ -41,8 +41,10 @@ import { api } from 'src/boot/axios'
 import { useProjectStore } from 'src/stores/project-store';
 import { useSubProjectStore } from 'src/stores/subProject-store';
 import { priority } from '../../../../constantes/dbFieldsOptions.js'
+import { useRoute } from 'vue-router';
 
 const {t} = useI18n()
+const route = useRoute()
 const projectStore = useProjectStore()
 const subProjectStore = useSubProjectStore()
 const model = defineModel()
@@ -50,7 +52,7 @@ const model = defineModel()
 const form = reactive({});
 
 const submit = () => {
-  form._projectId = projectStore.currentProjectId
+  form._projectId = route.params.projectId
   api.post('/api/subProject/create', form)
     .then(response => {
       subProjectStore.addSubProjectToList(response.data)

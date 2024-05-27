@@ -17,11 +17,9 @@ const projectStore = useProjectStore()
 
 const loaded = ref(false)
 
-projectStore.updateCurrentProjectId(props.projectId)
-
 onMounted(async () => {
   if(projectStore.projects.length === 0) {
-    await projectStore.fetchCurrentProject()
+    await projectStore.fetchProject(props.projectId)
   }
   loaded.value = true
 })

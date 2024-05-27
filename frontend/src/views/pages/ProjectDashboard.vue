@@ -22,13 +22,15 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import { useProjectStore } from 'src/stores/project-store.js'
+import { useRoute } from 'vue-router';
 
 import ProjectNavTiles from '../project/ProjectNavTiles.vue';
 import BudgetProgressBar from '../common/BudgetProgressBar.vue'
 
 const {t} = useI18n()
+const route = useRoute()
 const projectStore = useProjectStore()
-const project = projectStore.currentProject
+const project = projectStore.getProject(route.params.projectId)
 
 </script>
 
@@ -37,7 +39,6 @@ const project = projectStore.currentProject
   background-color: white;
   border-radius: 8px;
   width: 49%;
-  //height: 10rem;
   padding: 1.5rem 2rem
 }
 </style>

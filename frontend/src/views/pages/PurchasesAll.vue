@@ -20,12 +20,14 @@ import {useI18n} from 'vue-i18n'
 import { api } from 'src/boot/axios'
 import { useProjectStore } from 'src/stores/project-store';
 import { usePurchaseStore } from 'src/stores/purchase-store';
+import { useRoute } from 'vue-router';
 
 import PurchaseForm from '../purchase/PurchaseForm.vue'
 import SearchBar from '../common/SearchBar.vue'
 import PurchasesTable from '../purchase/PurchasesTable.vue';
 
 const {t} = useI18n()
+const route = useRoute()
 const projectStore = useProjectStore()
 const purchaseStore = usePurchaseStore()
 
@@ -40,7 +42,7 @@ const filteredPurchases = computed(() => {
 })
 
 onMounted(() => {
-  api.get('/api/purchase/all', {params: {projectId: projectStore.currentProjectId}})
+  api.get('/api/purchase/all', {params: {projectId: route.params.projectId}})
     .then(response => purchaseStore.updatePurchases(response.data))
     .catch(error => console.error(error))
 })

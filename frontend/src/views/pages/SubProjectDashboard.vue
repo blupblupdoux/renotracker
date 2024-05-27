@@ -1,6 +1,6 @@
 <template>
   <div class="row items-center">
-    <h3 class="col-12">{{ projectStore.currentProject.name }}</h3>
+    <h3 class="col-12">{{ projectStore.getProject(route.params.projectId).name }}</h3>
     <h2 class="col-12">{{ subProject.name }}</h2>
     <div class="col-7">coucou</div>
 
@@ -16,19 +16,19 @@ import {ref, onMounted, computed} from 'vue'
 import { useProjectStore } from 'src/stores/project-store';
 import { api } from 'src/boot/axios';
 import { useSubProjectStore } from 'src/stores/subProject-store';
+import { useRoute } from 'vue-router';
 import PurchasesTable from '../purchase/PurchasesTable.vue';
 
+const route = useRoute()
 const projectStore = useProjectStore()
 const subProjectStore = useSubProjectStore()
 
-const subProject = computed(() => subProjectStore.currentSubProject(props.subProjectId))
-// computed(() => subProjectStore.currentSubProject(props.subProjectId))
-// const projectName = compu
+const subProject = computed(() => subProjectStore.getSubProject(route.params.subProjectId))
 
 const test = ref([])
 
 // onMounted(() => {
-//   api.get('/api/purchase/all', {params: {projectId: projectStore.currentProjectId}})
+//   api.get('/api/purchase/all', {params: {projectId: route.params.projectId}})
 //     .then(response => test.value = response.data)
 //     .catch(error => console.error(error))
 // })

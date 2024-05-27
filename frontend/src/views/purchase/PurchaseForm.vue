@@ -55,12 +55,14 @@ import { date } from 'quasar'
 import { api } from "src/boot/axios";
 import { usePurchaseStore } from "src/stores/purchase-store";
 import { useProjectStore } from "src/stores/project-store";
+import { useRoute } from 'vue-router';
 
 import RightDrawer from '../common/RightDrawer.vue';
 import InputCustom from '../common/InputCustom.vue'
 import CalculatePriceHelper from "./CalculatePriceHelper.vue";
 
 const {t} = useI18n()
+const route = useRoute()
 const projectStore = useProjectStore()
 const purchaseStore = usePurchaseStore()
 
@@ -85,7 +87,7 @@ const pricePerUnit = computed(() => form.price / form.quantity )
 const getUnit = computed(() => form.unit || t('purchase.unitField'))
 
 const submit = async () => {
-  form._projectId = projectStore.currentProjectId
+  form._projectId = route.params.projectId
 
   try {
     if(isUpdateMode.value) {

@@ -21,7 +21,7 @@
     <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.12)"></div>
 
     <!-- Display only if in 'project mode' -->
-    <q-list v-if="projectStore.currentProjectId" padding>
+    <q-list v-if="route.params.projectId" padding>
       <nav-sidebar-item v-for="item in specificsItems" 
         :key="'specificsItems-' + item.label"
         :item="item">
@@ -53,7 +53,7 @@ const mainItems = [
   {label: t('nav.tools'), link: "", icon: "r_build"},
 ]
 
-const projectPrefix = computed(() => `/project/${projectStore.currentProjectId}`)
+const projectPrefix = computed(() => `/project/${route.params.projectId}`)
 
 const specificsItems = computed(() => {
   return [

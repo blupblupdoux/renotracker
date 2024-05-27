@@ -12,8 +12,7 @@
   <div class="row">
     <sub-project-card v-for="subProject in subProjectsFiltered" 
       :key="'subProject-card-' + subProject._id"
-      :sub-project="subProject"
-      :project-id="projectStore.currentProjectId">
+      :sub-project="subProject">
     </sub-project-card>
   </div>
 </template>
@@ -24,12 +23,14 @@ import { onMounted, computed, ref } from 'vue'
 import { useSubProjectStore } from 'src/stores/subProject-store.js'
 import { useProjectStore } from 'src/stores/Project-store.js'
 import { api } from 'src/boot/axios';
+import { useRoute } from 'vue-router';
 
 import SubProjectForm from '../subProject/SubProjectForm.vue'
 import SearchBar from '../common/SearchBar.vue'
 import SubProjectCard from '../subProject/SubProjectCard.vue'
 
 const {t} = useI18n()
+const route = useRoute()
 const projectStore = useProjectStore()
 const subProjectStore = useSubProjectStore()
 let drawer = ref(false)
@@ -41,7 +42,7 @@ const subProjectsFiltered = computed(() => {
 })
 
 onMounted(() => {
-  api.get('/api/subProject/all', {params: {projectId: projectStore.currentProjectId}})
+  api.get('/api/subProject/all', {params: {projectId: route.params.projectId}})
     .then(response => subProjectStore.updateSubProjects(response.data))
     .catch(error => console.error(error))
 })

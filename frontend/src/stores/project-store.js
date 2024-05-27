@@ -5,27 +5,25 @@ import { api } from 'src/boot/axios';
 export const useProjectStore = defineStore('project', () => {
   
   let projects = ref([]);
-  let currentProjectId = ref(null)
 
-  const currentProject = computed(() => {
-    const results = projects.value.filter(project => project._id === currentProjectId.value)
+  const getProject = (id) => {
+    const results = projects.value.filter(project => project._id === id)
     return results.length > 0 ? results[0] : null 
-  })
+  }
 
   const updateProjects = (payload) => projects.value = payload
-  const updateCurrentProjectId = (payload) => currentProjectId.value = payload
   const addProjectToList = (payload) => projects.value.push(payload)
 
-  const fetchCurrentProject = async () => {
-    await api.get('/api/project/' + currentProjectId.value)
+  const fetchProject = async (id) => {
+    await api.get('/api/project/' + id)
       .then(response => addProjectToList(response.data))
       .catch((error) => console.error(error))
   }
   
   return {
-    projects, currentProjectId, 
-    currentProject, 
-    updateProjects, updateCurrentProjectId, addProjectToList, 
-    fetchCurrentProject
+    projects, 
+    getProject, 
+    updateProjects, addProjectToList, 
+    fetchProject
   }
 });

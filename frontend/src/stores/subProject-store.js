@@ -6,7 +6,7 @@ export const useSubProjectStore = defineStore('subProject', () => {
   
   let subProjects = ref([]);
 
-  const currentSubProject = (id) => {
+  const getSubProject = (id) => {
     const results = subProjects.value.filter(subProject => subProject._id === id)
     return results.length > 0 ? results[0] : null 
   }
@@ -14,7 +14,7 @@ export const useSubProjectStore = defineStore('subProject', () => {
   const updateSubProjects = (payload) => subProjects.value = payload
   const addSubProjectToList = (payload) => subProjects.value.push(payload)
 
-  const fetchCurrentSubProject = async (id) => {
+  const fetchSubProject = async (id) => {
     await api.get('/api/subProject/' + id)
       .then(response => addSubProjectToList(response.data))
       .catch((error) => console.error(error))
@@ -22,8 +22,8 @@ export const useSubProjectStore = defineStore('subProject', () => {
   
   return {
     subProjects, 
-    currentSubProject,
+    getSubProject,
     updateSubProjects, addSubProjectToList,
-    fetchCurrentSubProject
+    fetchSubProject
   }
 });
