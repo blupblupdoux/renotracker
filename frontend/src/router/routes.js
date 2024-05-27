@@ -28,7 +28,6 @@ const routes = [
         component: () => import('../views/layouts/SubProjectLayout.vue'),
         children: [
           { path: '', component: () => import('../views/pages/SubProjectDashboard.vue')},
-          
         ]
       },
     ]

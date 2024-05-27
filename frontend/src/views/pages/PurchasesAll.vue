@@ -42,7 +42,7 @@ const filteredPurchases = computed(() => {
 })
 
 onMounted(() => {
-  api.get('/api/purchase/all', {params: {projectId: route.params.projectId}})
+  api.get('/api/purchase/project/' + route.params.projectId  + '/all')
     .then(response => purchaseStore.updatePurchases(response.data))
     .catch(error => console.error(error))
 })

@@ -42,7 +42,7 @@ const subProjectsFiltered = computed(() => {
 })
 
 onMounted(() => {
-  api.get('/api/subProject/all', {params: {projectId: route.params.projectId}})
+  api.get('/api/subProject/project/' + route.params.projectId  + '/all')
     .then(response => subProjectStore.updateSubProjects(response.data))
     .catch(error => console.error(error))
 })

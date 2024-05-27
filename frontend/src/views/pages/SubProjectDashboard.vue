@@ -28,7 +28,7 @@ const subProject = computed(() => subProjectStore.getSubProject(route.params.sub
 const test = ref([])
 
 // onMounted(() => {
-//   api.get('/api/purchase/all', {params: {projectId: route.params.projectId}})
+//   api.get('/api/purchase/project/' + route.params.projectId + '/all')
 //     .then(response => test.value = response.data)
 //     .catch(error => console.error(error))
 // })
