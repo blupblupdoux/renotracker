@@ -18,13 +18,12 @@ import { api } from 'src/boot/axios';
 import { useSubProjectStore } from 'src/stores/subProject-store';
 import PurchasesTable from '../purchase/PurchasesTable.vue';
 
-const props = defineProps({subProjectId: String})
-
 const projectStore = useProjectStore()
 const subProjectStore = useSubProjectStore()
 
 const subProject = computed(() => subProjectStore.currentSubProject(props.subProjectId))
-const projectName = compu
+// computed(() => subProjectStore.currentSubProject(props.subProjectId))
+// const projectName = compu
 
 const test = ref([])
 

@@ -12,12 +12,12 @@ import { useProjectStore } from 'src/stores/project-store.js'
 
 import LoaderDefault from '../common/LoaderDefault.vue';
 
-const props = defineProps({id: String})
+const props = defineProps({projectId: String, subProjectId: String})
 const projectStore = useProjectStore()
 
 const loaded = ref(false)
 
-projectStore.updateCurrentProjectId(props.id)
+projectStore.updateCurrentProjectId(props.projectId)
 
 onMounted(async () => {
   if(projectStore.projects.length === 0) {

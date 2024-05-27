@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="'/subProject/' + subProject._id" class="col-12 col-md-6 col-lg-4 q-px-sm" style="  text-decoration: none;">
+  <router-link :to="`/project/${projectId}/subProject/${subProject._id}`" class="col-12 col-md-6 col-lg-4 q-px-sm" style="  text-decoration: none;">
     <div class="subProject-card card column items-stretch justify-between">
       <div class="sub-title text-dark q-mb-md">{{ subProject.name }}</div>
       <div class="txt-light q-mb-md">{{ getDescription }}</div>
@@ -19,7 +19,7 @@ import { status } from '../../../../constantes/dbFieldsOptions.js'
 import { useI18n } from 'vue-i18n';
 import { computed } from 'vue'
 
-const props = defineProps({subProject: Object})
+const props = defineProps({subProject: Object, projectId: String})
 const {t} = useI18n()
 
 const getDescription = computed(() => props.subProject.description || t('subProject.noDescription'))

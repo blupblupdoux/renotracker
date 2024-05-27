@@ -12,7 +12,8 @@
   <div class="row">
     <sub-project-card v-for="subProject in subProjectsFiltered" 
       :key="'subProject-card-' + subProject._id"
-      :sub-project="subProject">
+      :sub-project="subProject"
+      :project-id="projectStore.currentProjectId">
     </sub-project-card>
   </div>
 </template>
