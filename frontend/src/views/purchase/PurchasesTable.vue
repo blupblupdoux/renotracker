@@ -1,7 +1,7 @@
 <template>
   <q-table
     :rows="purchases"
-    :columns="columns"
+    :columns="columnsFiltered"
     row-key="_id"
     virtual-scroll
     :rows-per-page-label="t('purchase.recordPerPage')"
@@ -14,13 +14,16 @@
 import {useI18n} from 'vue-i18n'
 import { currencyBeautiful } from 'src/composables/Formatter';
 import { usePurchaseStore } from 'src/stores/purchase-store';
+import {computed} from 'vue'
 
-const props = defineProps({purchases: Array})
+const props = defineProps({purchases: Array, columnsExcluded: {type: Array, default(){return []}}})
 const {t} = useI18n()
 const purchaseStore = usePurchaseStore()
 
 const quantityWithUnit = (row) => row.quantity + ' ' + (row.unit || '')
 const pricePerUnit = (row) => currencyBeautiful(row.price / row.quantity) + ' / ' + (row.unit || t('purchase.unitField'))
+
+const columnsFiltered = computed(() => columns.filter(c => !props.columnsExcluded.includes(c.name)))
 
 const columns = [
   { name: 'name', label: t('auth.nameField'), field: 'name', align: 'left', sortable: true },
