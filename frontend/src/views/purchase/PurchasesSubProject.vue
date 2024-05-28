@@ -7,6 +7,7 @@
     
     <purchases-table :purchases="test" :columns-excluded="['category', 'shop']"></purchases-table>
 
+    <!-- Purchase Linker -->
     <right-drawer v-model="drawer" :width="800">
       <purchases-all :is-linker-mode="true"></purchases-all>
     </right-drawer>
