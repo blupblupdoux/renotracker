@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/project/${projectId}/subProject/${subProject._id}`" class="col-12 col-md-6 col-lg-4 q-px-sm" style="  text-decoration: none;">
+  <router-link :to="`/project/${route.params.projectId}/subProject/${subProject._id}`" class="col-12 col-md-6 col-lg-4 q-px-sm" style="  text-decoration: none;">
     <div class="subProject-card card column items-stretch justify-between">
       <div class="sub-title text-dark q-mb-md">{{ subProject.name }}</div>
       <div class="txt-light q-mb-md">{{ getDescription }}</div>
@@ -18,9 +18,11 @@ import { currencyBeautiful } from 'src/composables/Formatter'
 import { status } from '../../../../constantes/dbFieldsOptions.js'
 import { useI18n } from 'vue-i18n';
 import { computed } from 'vue'
+import { useRoute } from 'vue-router';
 
-const props = defineProps({subProject: Object, projectId: String})
+const props = defineProps({subProject: Object})
 const {t} = useI18n()
+const route = useRoute()
 
 const getDescription = computed(() => props.subProject.description || t('subProject.noDescription'))
 const getStatus = computed(() => status.filter(item => item.value === props.subProject.status)[0])

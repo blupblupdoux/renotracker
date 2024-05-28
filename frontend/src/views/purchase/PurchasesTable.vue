@@ -7,7 +7,33 @@
     :rows-per-page-label="t('purchase.recordPerPage')"
     :rows-per-page-options="[25, 50, 100]"
     @row-click="onRowclick"
-  />
+  >
+
+    <!-- Col label - Used when link purchase to sub-project -->
+    <template v-if="isLinkerMode" v-slot:header="props">
+      <q-tr :props="props">
+        <q-th auto-width />
+        <q-th v-for="col in props.cols" :key="col.name" :props="props">{{ col.label }}</q-th>
+      </q-tr>
+    </template>
+
+    <!-- Col collapse - Used when link purchase to sub-project -->
+    <template v-if="isLinkerMode" v-slot:body="props">
+
+      <!-- Cell content -->
+      <q-tr @click="props.expand = !props.expand" :props="props">
+        <q-td auto-width><q-btn size="sm" round dense :icon="props.expand ? 'keyboard_arrow_up' : 'keyboard_arrow_down'" /></q-td>
+        <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
+      </q-tr>
+
+      <!-- Collapse content -->
+      <q-tr v-show="props.expand" :props="props">
+        <q-td colspan="100%">
+          <purchases-sub-project-collapse></purchases-sub-project-collapse>
+        </q-td>
+      </q-tr>
+    </template>
+  </q-table>
 </template>
 
 <script setup>
@@ -16,7 +42,13 @@ import { currencyBeautiful } from 'src/composables/Formatter';
 import { usePurchaseStore } from 'src/stores/purchase-store';
 import {computed} from 'vue'
 
-const props = defineProps({purchases: Array, columnsExcluded: {type: Array, default(){return []}}})
+import PurchasesSubProjectCollapse from './PurchasesSubProjectCollapse.vue';
+
+const props = defineProps({
+  isLinkerMode: {type: Boolean, default: false}, 
+  purchases: Array, 
+  columnsExcluded: {type: Array, default(){return []}}
+})
 const {t} = useI18n()
 const purchaseStore = usePurchaseStore()
 

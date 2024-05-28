@@ -2,7 +2,7 @@
 
 <purchase-form></purchase-form>
 
-<h2>{{ t('nav.purchases') }}</h2>
+<h2 v-if="!isLinkerMode">{{ t('nav.purchases') }}</h2>
 
 <search-bar v-model="query" 
     :placeholder="t('common.search')" 
@@ -10,7 +10,7 @@
     @on-btn-click="purchaseStore.updatePurchaseDrawer(true)">
 </search-bar>
 
-<purchases-table :purchases="filteredPurchases"></purchases-table>
+<purchases-table :is-linker-mode="isLinkerMode" :purchases="filteredPurchases"></purchases-table>
 
 </template>
 
@@ -26,6 +26,7 @@ import PurchaseForm from '../purchase/PurchaseForm.vue'
 import SearchBar from '../common/SearchBar.vue'
 import PurchasesTable from '../purchase/PurchasesTable.vue';
 
+const props = defineProps({isLinkerMode: {type: Boolean, default: false}})
 const {t} = useI18n()
 const route = useRoute()
 const projectStore = useProjectStore()

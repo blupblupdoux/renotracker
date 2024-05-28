@@ -67,6 +67,7 @@ export default {
     status_todo : 'Non commencé',
     status_started : 'En cours',
     status_finished : 'Terminé',
+    linkPurchase: 'Lier achat'
   },
   purchase: {
     createPurchase: 'Créer un achat',
