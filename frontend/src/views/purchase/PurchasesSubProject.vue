@@ -18,21 +18,23 @@
 import {ref, onMounted } from 'vue'
 import { api } from 'src/boot/axios';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 
 import PurchasesTable from './PurchasesTable.vue';
 import RightDrawer from '../common/RightDrawer.vue';
 import PurchasesAll from '../pages/PurchasesAll.vue';
 
 const {t} = useI18n()
+const route = useRoute()
 
 const test = ref([])
 const drawer = ref(false)
 
-// onMounted(() => {
-//   api.get('/api/purchase/project/' + route.params.projectId + '/all')
-//     .then(response => test.value = response.data)
-//     .catch(error => console.error(error))
-// })
+onMounted(() => {
+  api.get('/api/purchase/subProject/' + route.params.subProjectId + '/all')
+    .then(response => test.value = response.data)
+    .catch(error => console.error(error))
+})
 </script>
 
 <style lang="scss">

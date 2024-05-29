@@ -1,7 +1,15 @@
 const Purchase = require('../models/Purchase')
+const SubProjectPurchase = require('../models/SubProjectPurchase')
 
 exports.all = (req, res, next) => {
   Purchase.find({_projectId: req.params.projectId})
+    .then(purchases => res.status(200).json(purchases))
+    .catch(error => res.status(400).json({ error }));
+}
+
+exports.allForSubProject = async (req, res, next) => {
+  const ids = await SubProjectPurchase.getProductIds(req.params.subProjectId)
+  Purchase.find({_id: { $in: ids }})
     .then(purchases => res.status(200).json(purchases))
     .catch(error => res.status(400).json({ error }));
 }
