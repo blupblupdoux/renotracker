@@ -84,6 +84,9 @@ export default {
     calculatePrice: 'Calculer le prix total',
     calculatePriceHelp_1: "J'ai payé",
     calculatePriceHelp_2: 'pour',
-    recordPerPage: 'Lignes par page'
+    recordPerPage: 'Lignes par page',
+    stock: 'Stock',
+    link: 'Lier',
+    toSubProject: 'au sous project'
   }
 }

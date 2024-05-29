@@ -27,9 +27,9 @@
       </q-tr>
 
       <!-- Collapse content -->
-      <q-tr v-show="props.expand" :props="props">
-        <q-td colspan="100%">
-          <purchases-sub-project-collapse></purchases-sub-project-collapse>
+      <q-tr v-if="props.expand" :props="props">
+        <q-td colspan="100%" class="collapse-background">
+          <purchases-sub-project-collapse :purchase="props.row"></purchases-sub-project-collapse>
         </q-td>
       </q-tr>
     </template>
@@ -60,9 +60,9 @@ const columnsFiltered = computed(() => columns.filter(c => !props.columnsExclude
 const columns = [
   { name: 'name', label: t('auth.nameField'), field: 'name', align: 'left', sortable: true },
   { name: 'shop', label: t('purchase.shopField'), field: 'shop', align: 'left', sortable: true },
-  { name: 'quantity', label: t('purchase.quantityField'), field: row => quantityWithUnit(row) , align: 'left', sortable: false },
+  { name: 'quantity', label: t('purchase.stock'), field: row => quantityWithUnit(row) , align: 'left', sortable: false },
   { name: 'price', label: t('purchase.priceField'), field: row => pricePerUnit(row) , align: 'left', sortable: false },
-  { name: 'category', label: 'Categories', field: row => 'xx' , align: 'left', sortable: false },
+  // { name: 'category', label: 'Categories', field: row => 'xx' , align: 'left', sortable: false },
 ]
 
 const onRowclick = (evt, row, index) => {
@@ -70,3 +70,9 @@ const onRowclick = (evt, row, index) => {
   purchaseStore.updatePurchaseDrawer(true)
 }
 </script>
+
+<style>
+.collapse-background {
+  background-color: #f2f2f2!important;
+}
+</style>

@@ -24,7 +24,7 @@
       v-model="modelBinding" 
       :placeholder="placeholder"
       step="any"
-      class="input-custom"/>
+      :class="['input-custom ', {dense: dense}]" />
 
   </div>
 </template>
@@ -39,6 +39,7 @@ const props = defineProps({
   options: Array,
   placeholder: { type: String, default: "" },
   required: { type: Boolean, default: false },
+  dense: { type: Boolean, default: false }
 });
 
 const model = defineModel();
@@ -86,6 +87,10 @@ const getSize = computed(() => (props.size ? "input-" + props.size : ""));
   }
   &.input-lg {
     width: 50%;
+  }
+
+  .input-custom.dense {
+    padding: 4px 8px
   }
 }
 </style>
