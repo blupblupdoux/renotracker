@@ -7,6 +7,7 @@ exports.attach = (req, res, next) => {
 }
 
 exports.detach = (req, res, next) => {
-  console.log(req.body)
-  res.status(200).json()
+  SubProjectPurchase.deleteOne({_subProjectId: req.body._subProjectId, _purchaseId: req.body._purchaseId})
+    .then(() => res.status(200).json())
+    .catch(error => res.status(400).json({ error }));
 }
