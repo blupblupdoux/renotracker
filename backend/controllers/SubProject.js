@@ -13,7 +13,6 @@ exports.findOne = (req, res, next) => {
 }
 
 exports.create = (req, res, next) => {
-  delete req.body._id
   const subProject = new SubProject(req.body)
   subProject.save()
     .then(() => res.status(200).json(subProject))
