@@ -11,7 +11,7 @@ exports.allForSubProject = async (req, res, next) => {
   const ids = await SubProjectPurchase.getProductIds(req.params.subProjectId)
   Purchase.find({_id: { $in: ids }})
     .then(purchases => res.status(200).json(purchases))
-    .catch(error => res.status(400).json({ error }));
+    .catch(error => res.status(400).json({ error })); 
 }
 
 exports.create = (req, res, next) => {

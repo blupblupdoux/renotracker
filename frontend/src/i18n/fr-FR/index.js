@@ -87,6 +87,7 @@ export default {
     recordPerPage: 'Lignes par page',
     stock: 'Stock',
     link: 'Lier',
-    toSubProject: 'au sous project'
+    toSubProject: 'au sous project',
+    quantityWarning: "La quantité désirée est superieur au stock total. Si cela est voulu vous pouvez ignorer ce message."
   }
 }

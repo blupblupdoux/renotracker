@@ -1,11 +1,19 @@
 <template>
-  <div class="row items-center q-mx-xl">
-    <span>{{ t('purchase.link') }}</span>
-    <input-custom v-model="dataBinding" type="number" size="sm" class="q-mx-sm" dense style="margin-bottom: 0;"></input-custom>
-    <span v-if="purchase.unit">{{ `(${purchase.unit})` }}</span>
-    <span class="text-bold q-ml-sm">{{ purchase.name }}</span>
-    <span class="q-ml-sm">{{ t('purchase.toSubProject') }}</span>
-    <span class="text-bold q-ml-sm">{{ subProject.name }}</span>
+  <div class="q-mx-xl">
+    <div class="row items-center">
+      <span>{{ t('purchase.link') }}</span>
+      <input-custom v-model="dataBinding" type="number" size="sm" class="q-mx-sm" dense style="margin-bottom: 0;"></input-custom>
+      <span v-if="purchase.unit">{{ `(${purchase.unit})` }}</span>
+      <span class="text-bold q-ml-sm">{{ purchase.name }}</span>
+      <span class="q-ml-sm">{{ t('purchase.toSubProject') }}</span>
+      <span class="text-bold q-ml-sm">{{ subProject.name }}</span>
+    </div>
+
+    <!-- Warning if quantity wanted is higher than total stock -->
+    <div v-if="data.quantity > purchase.quantity" class="q-mt-sm row items-center">
+      <q-icon name="warning" color="accent" size="17px"></q-icon>
+      <span class="q-ml-sm text-accent txt-semi-bold text-italic">{{ t('purchase.quantityWarning') }}</span>
+    </div>
   </div>
 </template>
 
