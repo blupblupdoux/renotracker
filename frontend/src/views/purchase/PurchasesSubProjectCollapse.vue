@@ -37,7 +37,7 @@ const subProject = subProjectStore.getSubProject(route.params.subProjectId)
 const data = reactive({
   _subProjectId: route.params.subProjectId,
   _purchaseId: props.purchase._id,
-  quantity: props.purchase.quantity
+  quantity: props.purchase?.subprojectQuantity || 0
 })
 
 const dataBinding = computed({
