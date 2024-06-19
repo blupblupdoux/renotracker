@@ -9,7 +9,7 @@ router.get('/subprojects/:id', subProjectController.findOne)
 router.post('/subprojects/create', subProjectController.create)
 
 // Sub-project Purchase relation
-router.post('/subprojects/purchases/attach', subProjectPurchaseController.attach);
-router.delete('/subprojects/purchases/detach', subProjectPurchaseController.detach);
+router.post('/subprojects/purchases', subProjectPurchaseController.attach);
+router.delete('/subprojects/purchases', subProjectPurchaseController.detach);
 
 module.exports = router

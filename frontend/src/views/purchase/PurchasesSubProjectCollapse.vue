@@ -50,19 +50,17 @@ const dataBinding = computed({
 
 const submit = debounce(() => {
 
-  if(!data.quantity || data.quantity === 0) {
-    api.delete('/api/subProject/purchase/detach', data)
+  const method = !data.quantity || data.quantity === 0 ? 'delete' : 'post'
+
+  api[method]('/api/subProjects/purchases/' + type, data)
     .then(response => {
+      if(method === 'post') {
+        console.log('attached', response.data)
+      } else {
         console.log('detached', response.data)
+      }
     })
     .catch(error => console.error(error))
-  } else {
-    api.post('/api/subprojects/purchases/attach', data)
-    .then(response => {
-        console.log('detached', response.data)
-    })
-    .catch(error => console.error(error))
-  }
 }, 1000)
 
 </script>

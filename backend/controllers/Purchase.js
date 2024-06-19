@@ -1,14 +1,21 @@
 const Purchase = require('../models/Purchase')
 const SubProjectPurchase = require('../models/SubProjectPurchase')
 
-exports.all = (req, res, next) => {
-  Purchase.find({_projectId: req.params.projectId})
+exports.all = async (req, res, next) => {
+
+  if(req.query.subProjectId) {
+    Purchase.getProductsWithPivot(req.query.subProjectId)
+      .then(purchases => res.status(200).json(purchases))
+      .catch(error => res.status(400).json({ error }));
+  } else {
+    Purchase.find({_projectId: req.params.projectId})
     .then(purchases => res.status(200).json(purchases))
     .catch(error => res.status(400).json({ error }));
+  }
 }
 
 exports.allForSubProject = async (req, res, next) => {
-  Purchase.getProductForSubProjectWithPivot(req.params.subProjectId)
+  Purchase.getProductsForSubProjectWithPivot(req.params.subProjectId)
     .then(purchases => res.status(200).json(purchases))
     .catch(error => res.status(400).json({ error })); 
 }

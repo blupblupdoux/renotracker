@@ -11,20 +11,47 @@ const purchaseSchema = mongoose.Schema({
   note: {type: String, required: false},
 }, {timestamps: true})
 
-purchaseSchema.statics.getProductForSubProjectWithPivot = async function (subProjectId) {
+const purchaseFormat = {
+  _id: 1,
+  _projectId: 1,
+  name: 1,
+  stock: 1,
+  price: 1,
+  purchased_at: 1,
+}
+
+purchaseSchema.statics.getProductsWithPivot = async function (subProjectId) {
+  return await this.aggregate([
+    { 
+      $lookup: {
+        from: 'subprojectpurchases',
+        let: { purchaseId: '$_id' },
+        pipeline: [
+          { 
+            $match: {
+              $expr: {
+                $and: [
+                  { $eq: ['$_purchaseId', '$$purchaseId'] },
+                  { $eq: ['$_subProjectId', new mongoose.Types.ObjectId(subProjectId)] }
+                ]
+              }
+            }
+          }
+        ],
+        as: 'pivot'
+      }
+    },
+    { $unwind: { path: '$pivot', preserveNullAndEmptyArrays: true } },
+    { $project: { ...purchaseFormat, subprojectQuantity: '$pivot.quantity'}}
+  ])
+}
+
+purchaseSchema.statics.getProductsForSubProjectWithPivot = async function (subProjectId) {
   return await this.aggregate([
     { $lookup: {from: 'subprojectpurchases', localField: '_id', foreignField: '_purchaseId', as: 'pivot'}},
     { $unwind: '$pivot' },
     { $match: { 'pivot._subProjectId': new mongoose.Types.ObjectId(subProjectId) } },
-    { $project: {
-      _id: 1,
-      _projectId: 1,
-      name: 1,
-      stock: '$quantity',
-      quantity: '$pivot.quantity',
-      price: 1,
-      purchased_at: 1,
-    }},
+    { $project: {...purchaseFormat, quantity: '$pivot.quantity'}},
   ])
 }
 
