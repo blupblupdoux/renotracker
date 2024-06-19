@@ -4,12 +4,12 @@ const router = express.Router()
 const subProjectController = require('../controllers/SubProject')
 const subProjectPurchaseController = require('../controllers/SubProjectPurchase')
 
-router.get('/project/:projectId/all', subProjectController.all)
-router.get('/:id', subProjectController.findOne)
-router.post('/create', subProjectController.create)
+router.get('/project/:projectId/subprojects', subProjectController.all)
+router.get('/subprojects/:id', subProjectController.findOne)
+router.post('/subprojects/create', subProjectController.create)
 
 // Sub-project Purchase relation
-router.post('/purchase/attach', subProjectPurchaseController.attach)
-router.post('/purchase/detach', subProjectPurchaseController.detach)
+router.post('/subprojects/purchases/attach', subProjectPurchaseController.attach);
+router.delete('/subprojects/purchases/detach', subProjectPurchaseController.detach);
 
 module.exports = router

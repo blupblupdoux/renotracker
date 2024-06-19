@@ -38,7 +38,7 @@ const projectsFiltered = computed(() => {
 })
 
 onMounted(() => {
-  api.get('/api/project/all')
+  api.get('/api/projects')
     .then(response => projectStore.updateProjects(response.data))
     .catch(error => console.error(error))
 })

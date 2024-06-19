@@ -15,7 +15,7 @@ export const useProjectStore = defineStore('project', () => {
   const addProjectToList = (payload) => projects.value.push(payload)
 
   const fetchProject = async (id) => {
-    await api.get('/api/project/' + id)
+    await api.get('/api/projects/' + id)
       .then(response => addProjectToList(response.data))
       .catch((error) => console.error(error))
   }

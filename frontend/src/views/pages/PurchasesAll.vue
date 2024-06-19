@@ -10,7 +10,7 @@
     @on-btn-click="purchaseStore.updatePurchaseDrawer(true)">
 </search-bar>
 
-<purchases-table :is-linker-mode="isLinkerMode" :purchases="filteredPurchases"></purchases-table>
+<purchases-table :is-linker-mode="isLinkerMode" :purchases="filteredPurchases" :columns-excluded="['quantity']"></purchases-table>
 
 </template>
 
@@ -43,7 +43,7 @@ const filteredPurchases = computed(() => {
 })
 
 onMounted(() => {
-  api.get('/api/purchase/project/' + route.params.projectId  + '/all')
+  api.get('/api/project/' + route.params.projectId  + '/purchases')
     .then(response => purchaseStore.updatePurchases(response.data))
     .catch(error => console.error(error))
 })

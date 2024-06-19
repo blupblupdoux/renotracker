@@ -46,28 +46,35 @@ import PurchasesSubProjectCollapse from './PurchasesSubProjectCollapse.vue';
 
 const props = defineProps({
   isLinkerMode: {type: Boolean, default: false}, 
+  readonly: {trype: Boolean, default: false},
   purchases: Array, 
   columnsExcluded: {type: Array, default(){return []}}
 })
 const {t} = useI18n()
 const purchaseStore = usePurchaseStore()
 
-const quantityWithUnit = (row) => row.quantity + ' ' + (row.unit || '')
-const pricePerUnit = (row) => currencyBeautiful(row.price / row.quantity) + ' / ' + (row.unit || t('purchase.unitField'))
+const quantityWithUnit = (quantity, unit) => quantity + ' ' + (unit || '')
+const pricePerUnit = (row) => {
+  const quantity = row.stock || row.quantity
+  return currencyBeautiful(row.price / quantity) + ' / ' + (row.unit || t('purchase.unitField'))
+}
 
 const columnsFiltered = computed(() => columns.filter(c => !props.columnsExcluded.includes(c.name)))
 
 const columns = [
   { name: 'name', label: t('auth.nameField'), field: 'name', align: 'left', sortable: true },
   { name: 'shop', label: t('purchase.shopField'), field: 'shop', align: 'left', sortable: true },
-  { name: 'quantity', label: t('purchase.stock'), field: row => quantityWithUnit(row) , align: 'left', sortable: false },
+  { name: 'stock', label: t('purchase.stock'), field: row => quantityWithUnit(row.stock, row.unit) , align: 'left', sortable: false },
+  { name: 'quantity', label: t('purchase.quantityField'), field: row => quantityWithUnit(row.quantity, row.unit) , align: 'left', sortable: false },
   { name: 'price', label: t('purchase.priceField'), field: row => pricePerUnit(row) , align: 'left', sortable: false },
   // { name: 'category', label: 'Categories', field: row => 'xx' , align: 'left', sortable: false },
 ]
 
 const onRowclick = (evt, row, index) => {
-  purchaseStore.updateCurrentPurchaseId(row._id)
-  purchaseStore.updatePurchaseDrawer(true)
+  if(!props.readonly) {
+    purchaseStore.updateCurrentPurchaseId(row._id)
+    purchaseStore.updatePurchaseDrawer(true)
+  }
 }
 </script>
 

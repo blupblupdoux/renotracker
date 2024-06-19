@@ -49,7 +49,7 @@ const form = reactive({...formObject});
 
 const submit = () => {
   form._userId = userStore.user._id
-  api.post('/api/project/create', form)
+  api.post('/api/projects/create', form)
     .then(response => {
       projectStore.addProjectToList(response.data)
       Object.assign(form, formObject);

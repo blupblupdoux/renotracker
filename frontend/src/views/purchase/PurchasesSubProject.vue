@@ -5,7 +5,7 @@
       <q-btn push color="primary" text-color="white" @click="drawer = true" :label="t('subProject.linkPurchase')"></q-btn>
     </div>
     
-    <purchases-table :purchases="test" :columns-excluded="['category', 'shop']"></purchases-table>
+    <purchases-table :purchases="purchases" :columns-excluded="['category', 'shop', 'stock']" :readonly="true"></purchases-table>
 
     <!-- Purchase Linker -->
     <right-drawer v-model="drawer" :width="800">
@@ -27,12 +27,12 @@ import PurchasesAll from '../pages/PurchasesAll.vue';
 const {t} = useI18n()
 const route = useRoute()
 
-const test = ref([])
+const purchases = ref([])
 const drawer = ref(false)
 
 onMounted(() => {
-  api.get('/api/purchase/subProject/' + route.params.subProjectId + '/all')
-    .then(response => test.value = response.data)
+  api.get('/api/subProjects/' + route.params.subProjectId + '/purchases')
+    .then(response => purchases.value = response.data)
     .catch(error => console.error(error))
 })
 </script>

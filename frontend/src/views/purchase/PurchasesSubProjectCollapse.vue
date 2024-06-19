@@ -37,7 +37,7 @@ const subProject = subProjectStore.getSubProject(route.params.subProjectId)
 const data = reactive({
   _subProjectId: route.params.subProjectId,
   _purchaseId: props.purchase._id,
-  quantity: 0
+  quantity: props.purchase.quantity
 })
 
 const dataBinding = computed({
@@ -49,16 +49,20 @@ const dataBinding = computed({
 })
 
 const submit = debounce(() => {
-  const mode = !data.quantity || data.quantity === 0 ? 'detach' : 'attach'
-  api.post('/api/subProject/purchase/' + mode, data)
+
+  if(!data.quantity || data.quantity === 0) {
+    api.delete('/api/subProject/purchase/detach', data)
     .then(response => {
-      if(mode === 'attach') {
-        console.log('attached', response.data)
-      } else {
         console.log('detached', response.data)
-      }
     })
     .catch(error => console.error(error))
+  } else {
+    api.post('/api/subprojects/purchases/attach', data)
+    .then(response => {
+        console.log('detached', response.data)
+    })
+    .catch(error => console.error(error))
+  }
 }, 1000)
 
 </script>

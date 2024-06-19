@@ -28,8 +28,8 @@ app.use(authMiddleware)
 
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
-app.use('/api/project', projectRoutes)
-app.use('/api/subProject', subProjectRoutes)
-app.use('/api/purchase', purchaseRoutes)
+app.use('/api/projects', projectRoutes)
+app.use('/api', subProjectRoutes)
+app.use('/api', purchaseRoutes)
 
 module.exports = app

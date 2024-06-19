@@ -91,11 +91,11 @@ const submit = async () => {
 
   try {
     if(isUpdateMode.value) {
-      const response = await api.put('/api/purchase/update', form)
+      const response = await api.put('/api/purchases/update', form)
       purchaseStore.editPurchase(response.data)
       purchaseStore.updateCurrentPurchaseId(null)
     } else {
-      const response = await api.post('/api/purchase/create', form)
+      const response = await api.post('/api/purchases/create', form)
       purchaseStore.addPurchaseToList(response.data)
     }
 
@@ -106,7 +106,7 @@ const submit = async () => {
 }
 
 const deletePurchase = () => {
-  api.delete('/api/purchase/'+ purchaseStore.currentPurchaseId +'/delete')
+  api.delete('/api/purchases/'+ purchaseStore.currentPurchaseId)
     .then(() => {
       purchaseStore.removePurchaseFromList(purchaseStore.currentPurchaseId)
       onDrawerHide()

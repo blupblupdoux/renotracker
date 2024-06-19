@@ -15,7 +15,7 @@ export const useSubProjectStore = defineStore('subProject', () => {
   const addSubProjectToList = (payload) => subProjects.value.push(payload)
 
   const fetchSubProject = async (id) => {
-    await api.get('/api/subProject/' + id)
+    await api.get('/api/subprojects/' + id)
       .then(response => addSubProjectToList(response.data))
       .catch((error) => console.error(error))
   }
