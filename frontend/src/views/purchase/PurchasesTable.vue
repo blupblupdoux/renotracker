@@ -22,8 +22,17 @@
 
       <!-- Cell content -->
       <q-tr @click="props.expand = !props.expand" :props="props">
-        <q-td auto-width><q-btn size="sm" round dense :icon="props.expand ? 'keyboard_arrow_up' : 'keyboard_arrow_down'" /></q-td>
-        <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
+        <q-td auto-width :class="{'attached': props.row?.subprojectQuantity}">
+          <q-btn size="sm" round dense :icon="props.expand ? 'keyboard_arrow_up' : 'keyboard_arrow_down'" />
+        </q-td>
+
+        <q-td v-for="col in props.cols" 
+          :key="col.name" 
+          :props="props" 
+          :class="{'attached': props.row?.subprojectQuantity}"
+        >
+          {{ col.value }}
+        </q-td>
       </q-tr>
 
       <!-- Collapse content -->
@@ -54,19 +63,46 @@ const {t} = useI18n()
 const purchaseStore = usePurchaseStore()
 
 const quantityWithUnit = (quantity, unit) => quantity + ' ' + (unit || '')
-const pricePerUnit = (row) => {
-  const quantity = row.stock || row.quantity
-  return currencyBeautiful(row.price / quantity) + ' / ' + (row.unit || t('purchase.unitField'))
-}
+const pricePerUnit = (row) => currencyBeautiful(row.price / (row.stock || row.quantity)) + ' / ' + (row.unit || t('purchase.unitField'));
 
 const columnsFiltered = computed(() => columns.filter(c => !props.columnsExcluded.includes(c.name)))
 
 const columns = [
-  { name: 'name', label: t('auth.nameField'), field: 'name', align: 'left', sortable: true },
-  { name: 'shop', label: t('purchase.shopField'), field: 'shop', align: 'left', sortable: true },
-  { name: 'stock', label: t('purchase.stock'), field: row => quantityWithUnit(row.stock, row.unit) , align: 'left', sortable: false },
-  { name: 'quantity', label: t('purchase.quantityField'), field: row => quantityWithUnit(row.quantity, row.unit) , align: 'left', sortable: false },
-  { name: 'price', label: t('purchase.priceField'), field: row => pricePerUnit(row) , align: 'left', sortable: false },
+  { 
+    name: 'name', 
+    label: t('auth.nameField'), 
+    field: 'name', 
+    align: 'left', 
+    sortable: true 
+  },
+  { 
+    name: 'shop', 
+    label: t('purchase.shopField'), 
+    field: 'shop', 
+    align: 'left', 
+    sortable: true 
+  },
+  { 
+    name: 'stock', 
+    label: t('purchase.stock'), 
+    field: row => quantityWithUnit(row.stock, row.unit) , 
+    align: 'left', 
+    sortable: false 
+  },
+  { 
+    name: 'quantity', 
+    label: t('purchase.quantityField'), 
+    field: row => quantityWithUnit(row.quantity, row.unit), 
+    align: 'left', 
+    sortable: false 
+  },
+  { 
+    name: 'price', 
+    label: t('purchase.priceField'), 
+    field: row => pricePerUnit(row), 
+    align: 'left',
+    sortable: false 
+  },
   // { name: 'category', label: 'Categories', field: row => 'xx' , align: 'left', sortable: false },
 ]
 
@@ -78,8 +114,11 @@ const onRowclick = (evt, row, index) => {
 }
 </script>
 
-<style>
+<style lang="scss">
 .collapse-background {
   background-color: #f2f2f2!important;
+}
+tbody .attached {
+  background-color: $primaryLight;
 }
 </style>

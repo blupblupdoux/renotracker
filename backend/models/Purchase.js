@@ -42,7 +42,8 @@ purchaseSchema.statics.getProductsWithPivot = async function (subProjectId) {
       }
     },
     { $unwind: { path: '$pivot', preserveNullAndEmptyArrays: true } },
-    { $project: { ...purchaseFormat, subprojectQuantity: '$pivot.quantity'}}
+    { $project: { ...purchaseFormat, subprojectQuantity: '$pivot.quantity'}},
+    { $sort: { subprojectQuantity: -1 }}
   ])
 }
 
